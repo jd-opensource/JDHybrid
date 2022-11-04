@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JDHybrid'
-  s.version          = '1.0.0-beta1'
+  s.version          = '0.0.2'
   s.summary          = 'A short description of JDHybrid.'
 
 # This description is used to generate tags and improve search results.
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/JDHybrid/JDHybridTmp.git'
+  s.homepage         = 'https://github.com/JDFED/JDHybrid.git'
   s.license          = { :type => 'Apache', :file => 'LICENSE' }
   s.author           = { 'JDHybrid' => 'jdapp-webview@jd.com' }
   s.source           = { :git => 'https://github.com/JDFED/JDHybrid.git', :tag => s.version.to_s }
