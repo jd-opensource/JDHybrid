@@ -33,10 +33,9 @@ JDHybrid 提供了支持JDBridge的容器，未来还会支持离线加载能力
 如果你有任何问题，请随时在我们的讨论区开启一个新的讨论主题。
 
 <h2>License</h2>
-JDHybrid(包括子项目) 基于Apache 2.0协议开源，具体查看 LICENSE 文件了解更多信息.
+JDHybrid(包括子项目) 基于MIT协议开源，具体查看 LICENSE 文件了解更多信息.
 
 
 <h2>Contact</h2>
 
 邮箱: hybrid@jd.com
-咚咚群: 7410292

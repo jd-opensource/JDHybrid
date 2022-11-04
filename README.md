@@ -39,9 +39,8 @@ We would love for you to contribute to JDHybrid and help make it better! All typ
 If you have any questions, please feel free to open a new Discussion topic in our discussion forums.
 
 <h2>License</h2>
-JDHybrid (include sub projects）is released under the Apache 2.0 License, see the license file for more info.
+JDHybrid (include sub projects）is released under the MIT, see the license file for more info.
 
 
 <h2>Contact</h2>
 Email: hybrid@jd.com
-JDME Group No.: 7410292
