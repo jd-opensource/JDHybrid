@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">JDHybrid</string>
+    <string name="title_activity_main">JDHybrid</string>
+    <string name="title_activity_web_view">WebViewActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="settings_url0">file:///android_asset/jdbridge_demo.html</string>
+    <string name="settings_url1">https://m.jd.com</string>
+    <string name="settings_url2">https://prodev.m.jd.com/mall/active/3jmVvVWpsmP2m1Uab14H8crExDVw/index.html</string>
+</resources>

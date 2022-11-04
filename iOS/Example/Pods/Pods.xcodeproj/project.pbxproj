@@ -1,0 +1,696 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02BA08F3A17D8D38808DE3FE0F2400C1 /* JDBridgeManagerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = C84194E829C098ADA6D6CBCD900F6AFB /* JDBridgeManagerPrivate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		06DF11ADCFAEFED3E9605DE5EDD6C0C8 /* JDBridgeBasePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D1DEC9574BBABA984D8E3C28DB218E86 /* JDBridgeBasePlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37B6985F40A89BFC20789D949D789DF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A12C355E463B10B23D0A4B9F8CE0C0 /* Foundation.framework */; };
+		40F9790E5EB9EEA909253BD450F42378 /* JDBridgeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30277BAF0AC287F03BC7B6739999D59D /* JDBridgeManager.m */; };
+		410204C1EF0454F2FC085903096B0FAE /* XWebViewContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D1188F2FFD0C95BFB74E892C19CF300 /* XWebViewContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4AFA2EAA03B6DFEFEA9E2353A0A9036D /* _jdbridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A305358FD32EDE43829268472902AB3 /* _jdbridge.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4BC15A92E8B70260949A651AFA1884F1 /* JDBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 49B146F8614A15D7A705B817D71B3D80 /* JDBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5630790EB475D2F1647EFCAF0DDA4819 /* JDBridgeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 57618FDB21713741B5057D4CFA1347DB /* JDBridgeManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59DAE4F5B5380D58748A9B1FC85AF055 /* XWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3730744406B809C7FE88FE832C3EE438 /* XWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		745FBAABDDE079F52E882D48BE41C2CF /* JDBridgePluginUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8995405BD32564A45C9FF160F092C9BB /* JDBridgePluginUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7B959D7CCC72A05BEC3525CB77761276 /* Pods-JDHybrid_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AD3952BBCA8ED20BF07704B623118383 /* Pods-JDHybrid_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EA9FCB13E6E065ECA46DDF0E08625D1 /* JDHybrid-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 121D8611AF8508775CA05F18903A8A51 /* JDHybrid-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F5F110BC8D9EC707FD6BE5ADE3538F1 /* JDBridgePluginUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A0737B1151E490112698A859359E157C /* JDBridgePluginUtils.m */; };
+		98E82D327831763AF8FA2583C4AB6CD5 /* XWebViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF1E54922828E0A5FB06C993F55A4F9 /* XWebViewContainer.m */; };
+		A6DE38917678F5ECAD7C4C8529D3C0E1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C897531E0A2210C76C1F033A8A925F8 /* WebKit.framework */; };
+		A7A51C96196197AA6207B9FF605F7C4F /* JDHybrid-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3097E64564B7BF3F95C5E4A5DC4DEAA5 /* JDHybrid-dummy.m */; };
+		B67971648430827E4B4613D987C8E672 /* _jdbridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E92013AE21AE11584F0A73B95AE1F9A /* _jdbridge.m */; };
+		CAE891CCA9B4210599B7CAC348F37AF4 /* JDBridgeBasePluginPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 87ADB60518D4B8C977EC5C89617082CF /* JDBridgeBasePluginPrivate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DD991841BAF042327C1DF182FE3F679A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A046A0C3DA644670DE800C6194B2764 /* UIKit.framework */; };
+		F44D2E960BE536062DBDA375F652AB14 /* JDHybrid.h in Headers */ = {isa = PBXBuildFile; fileRef = 969F262D71EF033D7DA6E2791F430273 /* JDHybrid.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6314B892B4A0C5D7D023DC7206603E8 /* Pods-JDHybrid_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 75939A2DCAD14DCD73331C5D153863BE /* Pods-JDHybrid_Example-dummy.m */; };
+		FB6767F42490903AC1237B48C26F5131 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A12C355E463B10B23D0A4B9F8CE0C0 /* Foundation.framework */; };
+		FF917E3C2125211FCCA22B3BABC6B005 /* JDBridgeBasePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 24327F8DFB879ABFB4870952E9AC4B59 /* JDBridgeBasePlugin.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DAB23F200F08DC03A5D6623F8597FE0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDE5FB45CE072A84460E40D4997B517F;
+			remoteInfo = JDHybrid;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		121D8611AF8508775CA05F18903A8A51 /* JDHybrid-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JDHybrid-umbrella.h"; sourceTree = "<group>"; };
+		154682D12499EDC6600487549375ED3C /* JDHybrid.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JDHybrid.modulemap; sourceTree = "<group>"; };
+		24327F8DFB879ABFB4870952E9AC4B59 /* JDBridgeBasePlugin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = JDBridgeBasePlugin.m; sourceTree = "<group>"; };
+		30277BAF0AC287F03BC7B6739999D59D /* JDBridgeManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = JDBridgeManager.m; sourceTree = "<group>"; };
+		3097E64564B7BF3F95C5E4A5DC4DEAA5 /* JDHybrid-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JDHybrid-dummy.m"; sourceTree = "<group>"; };
+		3730744406B809C7FE88FE832C3EE438 /* XWebView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = XWebView.h; path = iOS/JDHybrid/XWebView/XWebView.h; sourceTree = "<group>"; };
+		3C897531E0A2210C76C1F033A8A925F8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		428294BD6F2F367E7A3096547F7E708E /* Pods-JDHybrid_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JDHybrid_Example.release.xcconfig"; sourceTree = "<group>"; };
+		49B146F8614A15D7A705B817D71B3D80 /* JDBridge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDBridge.h; path = iOS/JDHybrid/JDBridge/JDBridge.h; sourceTree = "<group>"; };
+		4A046A0C3DA644670DE800C6194B2764 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		4E92013AE21AE11584F0A73B95AE1F9A /* _jdbridge.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = _jdbridge.m; sourceTree = "<group>"; };
+		562FB22AD4F774F437B1C2996CD429ED /* Pods_JDHybrid_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_JDHybrid_Example.framework; path = "Pods-JDHybrid_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57618FDB21713741B5057D4CFA1347DB /* JDBridgeManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = JDBridgeManager.h; sourceTree = "<group>"; };
+		5CF1E54922828E0A5FB06C993F55A4F9 /* XWebViewContainer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = XWebViewContainer.m; sourceTree = "<group>"; };
+		75939A2DCAD14DCD73331C5D153863BE /* Pods-JDHybrid_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JDHybrid_Example-dummy.m"; sourceTree = "<group>"; };
+		7D1188F2FFD0C95BFB74E892C19CF300 /* XWebViewContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = XWebViewContainer.h; sourceTree = "<group>"; };
+		82A12C355E463B10B23D0A4B9F8CE0C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		82B206D122E589E62DB3530C6BE8F1D3 /* JDHybrid-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "JDHybrid-Info.plist"; sourceTree = "<group>"; };
+		87ADB60518D4B8C977EC5C89617082CF /* JDBridgeBasePluginPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = JDBridgeBasePluginPrivate.h; sourceTree = "<group>"; };
+		88CE3CAACBB6F40CF92F4AA695884040 /* Pods-JDHybrid_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JDHybrid_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		8995405BD32564A45C9FF160F092C9BB /* JDBridgePluginUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = JDBridgePluginUtils.h; sourceTree = "<group>"; };
+		969F262D71EF033D7DA6E2791F430273 /* JDHybrid.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDHybrid.h; path = iOS/JDHybrid/JDHybrid.h; sourceTree = "<group>"; };
+		98123B301FD38BFEA2E2191908ECD273 /* JDHybrid-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JDHybrid-prefix.pch"; sourceTree = "<group>"; };
+		9A305358FD32EDE43829268472902AB3 /* _jdbridge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = _jdbridge.h; sourceTree = "<group>"; };
+		9B5C5C5EC9CD3CB24949ED36F700874D /* Pods-JDHybrid_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JDHybrid_Example-Info.plist"; sourceTree = "<group>"; };
+		9D19F34296898C92E65A53FE81CF998E /* JDHybrid.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JDHybrid.xcconfig; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A0737B1151E490112698A859359E157C /* JDBridgePluginUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = JDBridgePluginUtils.m; sourceTree = "<group>"; };
+		AD3952BBCA8ED20BF07704B623118383 /* Pods-JDHybrid_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JDHybrid_Example-umbrella.h"; sourceTree = "<group>"; };
+		B23FD01E5092F0AFD47B862ADDFC8573 /* Pods-JDHybrid_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JDHybrid_Example-frameworks.sh"; sourceTree = "<group>"; };
+		BFC55455F5561BBC955BA4DEFC766139 /* Pods-JDHybrid_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JDHybrid_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C84194E829C098ADA6D6CBCD900F6AFB /* JDBridgeManagerPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = JDBridgeManagerPrivate.h; sourceTree = "<group>"; };
+		D1DEC9574BBABA984D8E3C28DB218E86 /* JDBridgeBasePlugin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = JDBridgeBasePlugin.h; sourceTree = "<group>"; };
+		DF42B5FFD8EF0087C247C5B0B52B4D15 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		EDD0CCC533F5FE6E32130CCB2DB2B013 /* JDHybrid.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = JDHybrid.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		EE7C43D1BC5D5FCA07C39D34DCC17B07 /* README-zh-CN.md */ = {isa = PBXFileReference; includeInIndex = 1; path = "README-zh-CN.md"; sourceTree = "<group>"; };
+		F808845EFEC9A03FA5FB7252C334FFF0 /* Pods-JDHybrid_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-JDHybrid_Example.modulemap"; sourceTree = "<group>"; };
+		FAAF63F2E4670FA4678433943C149960 /* Pods-JDHybrid_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JDHybrid_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		FD10486F53B2685F07B4E52F3DDBC27F /* JDHybrid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JDHybrid.framework; path = JDHybrid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		38450D7994C6C62971B58CB012497342 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37B6985F40A89BFC20789D949D789DF1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95ADAF8780A5897B6E5E5B7AAF7A3B7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB6767F42490903AC1237B48C26F5131 /* Foundation.framework in Frameworks */,
+				DD991841BAF042327C1DF182FE3F679A /* UIKit.framework in Frameworks */,
+				A6DE38917678F5ECAD7C4C8529D3C0E1 /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03C5C200A0787E300053CFA8F53CA094 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBEFA2BEB1BEA3AEB543A51607322A05 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		097205A20BC22C05EBB3FABA75242707 /* JDHybrid */ = {
+			isa = PBXGroup;
+			children = (
+				969F262D71EF033D7DA6E2791F430273 /* JDHybrid.h */,
+				5CCBE13D905D2AF6FF0D35E02413B83D /* JDBridge */,
+				1BC2BABAA9B395606C781A0E5BAACD1B /* Pod */,
+				52CFD83D0775CDF53A8B8CDFDE6384D5 /* Support Files */,
+				DFB474BC980D14CC1D751BF3B91542B6 /* XWebView */,
+			);
+			name = JDHybrid;
+			path = ../../..;
+			sourceTree = "<group>";
+		};
+		1BC2BABAA9B395606C781A0E5BAACD1B /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				EDD0CCC533F5FE6E32130CCB2DB2B013 /* JDHybrid.podspec */,
+				DF42B5FFD8EF0087C247C5B0B52B4D15 /* LICENSE */,
+				EE7C43D1BC5D5FCA07C39D34DCC17B07 /* README-zh-CN.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		52CFD83D0775CDF53A8B8CDFDE6384D5 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				154682D12499EDC6600487549375ED3C /* JDHybrid.modulemap */,
+				9D19F34296898C92E65A53FE81CF998E /* JDHybrid.xcconfig */,
+				3097E64564B7BF3F95C5E4A5DC4DEAA5 /* JDHybrid-dummy.m */,
+				82B206D122E589E62DB3530C6BE8F1D3 /* JDHybrid-Info.plist */,
+				98123B301FD38BFEA2E2191908ECD273 /* JDHybrid-prefix.pch */,
+				121D8611AF8508775CA05F18903A8A51 /* JDHybrid-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "iOS/Example/Pods/Target Support Files/JDHybrid";
+			sourceTree = "<group>";
+		};
+		555B9BB2196DB07A362A6E8DDF6D605C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9A305358FD32EDE43829268472902AB3 /* _jdbridge.h */,
+				4E92013AE21AE11584F0A73B95AE1F9A /* _jdbridge.m */,
+				D1DEC9574BBABA984D8E3C28DB218E86 /* JDBridgeBasePlugin.h */,
+				24327F8DFB879ABFB4870952E9AC4B59 /* JDBridgeBasePlugin.m */,
+				87ADB60518D4B8C977EC5C89617082CF /* JDBridgeBasePluginPrivate.h */,
+				57618FDB21713741B5057D4CFA1347DB /* JDBridgeManager.h */,
+				30277BAF0AC287F03BC7B6739999D59D /* JDBridgeManager.m */,
+				C84194E829C098ADA6D6CBCD900F6AFB /* JDBridgeManagerPrivate.h */,
+				8995405BD32564A45C9FF160F092C9BB /* JDBridgePluginUtils.h */,
+				A0737B1151E490112698A859359E157C /* JDBridgePluginUtils.m */,
+			);
+			name = Classes;
+			path = iOS/JDHybrid/JDBridge/Classes;
+			sourceTree = "<group>";
+		};
+		5CCBE13D905D2AF6FF0D35E02413B83D /* JDBridge */ = {
+			isa = PBXGroup;
+			children = (
+				49B146F8614A15D7A705B817D71B3D80 /* JDBridge.h */,
+				555B9BB2196DB07A362A6E8DDF6D605C /* Classes */,
+			);
+			name = JDBridge;
+			sourceTree = "<group>";
+		};
+		6FE7BFA7DB25A9D0805BE8388CB79E81 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD10486F53B2685F07B4E52F3DDBC27F /* JDHybrid.framework */,
+				562FB22AD4F774F437B1C2996CD429ED /* Pods_JDHybrid_Example.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C35D4E46120B8D3D4A61F43FAD84A997 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCED10D7117A827A94C41071F2F755EE /* Pods-JDHybrid_Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		CBEFA2BEB1BEA3AEB543A51607322A05 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				82A12C355E463B10B23D0A4B9F8CE0C0 /* Foundation.framework */,
+				4A046A0C3DA644670DE800C6194B2764 /* UIKit.framework */,
+				3C897531E0A2210C76C1F033A8A925F8 /* WebKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				F87A0C17B8E1DF276EA51C4976835AAC /* Development Pods */,
+				03C5C200A0787E300053CFA8F53CA094 /* Frameworks */,
+				6FE7BFA7DB25A9D0805BE8388CB79E81 /* Products */,
+				C35D4E46120B8D3D4A61F43FAD84A997 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D939ACEC0E23F7E670AB255698FD95A0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7D1188F2FFD0C95BFB74E892C19CF300 /* XWebViewContainer.h */,
+				5CF1E54922828E0A5FB06C993F55A4F9 /* XWebViewContainer.m */,
+			);
+			name = Classes;
+			path = iOS/JDHybrid/XWebView/Classes;
+			sourceTree = "<group>";
+		};
+		DCED10D7117A827A94C41071F2F755EE /* Pods-JDHybrid_Example */ = {
+			isa = PBXGroup;
+			children = (
+				F808845EFEC9A03FA5FB7252C334FFF0 /* Pods-JDHybrid_Example.modulemap */,
+				BFC55455F5561BBC955BA4DEFC766139 /* Pods-JDHybrid_Example-acknowledgements.markdown */,
+				FAAF63F2E4670FA4678433943C149960 /* Pods-JDHybrid_Example-acknowledgements.plist */,
+				75939A2DCAD14DCD73331C5D153863BE /* Pods-JDHybrid_Example-dummy.m */,
+				B23FD01E5092F0AFD47B862ADDFC8573 /* Pods-JDHybrid_Example-frameworks.sh */,
+				9B5C5C5EC9CD3CB24949ED36F700874D /* Pods-JDHybrid_Example-Info.plist */,
+				AD3952BBCA8ED20BF07704B623118383 /* Pods-JDHybrid_Example-umbrella.h */,
+				88CE3CAACBB6F40CF92F4AA695884040 /* Pods-JDHybrid_Example.debug.xcconfig */,
+				428294BD6F2F367E7A3096547F7E708E /* Pods-JDHybrid_Example.release.xcconfig */,
+			);
+			name = "Pods-JDHybrid_Example";
+			path = "Target Support Files/Pods-JDHybrid_Example";
+			sourceTree = "<group>";
+		};
+		DFB474BC980D14CC1D751BF3B91542B6 /* XWebView */ = {
+			isa = PBXGroup;
+			children = (
+				3730744406B809C7FE88FE832C3EE438 /* XWebView.h */,
+				D939ACEC0E23F7E670AB255698FD95A0 /* Classes */,
+			);
+			name = XWebView;
+			sourceTree = "<group>";
+		};
+		F87A0C17B8E1DF276EA51C4976835AAC /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				097205A20BC22C05EBB3FABA75242707 /* JDHybrid */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6A0B0DB36607F4D1E3307C8FA1B0CBCE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B959D7CCC72A05BEC3525CB77761276 /* Pods-JDHybrid_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8F032C8536DB0A6723B6F51668A5C29 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AFA2EAA03B6DFEFEA9E2353A0A9036D /* _jdbridge.h in Headers */,
+				4BC15A92E8B70260949A651AFA1884F1 /* JDBridge.h in Headers */,
+				06DF11ADCFAEFED3E9605DE5EDD6C0C8 /* JDBridgeBasePlugin.h in Headers */,
+				CAE891CCA9B4210599B7CAC348F37AF4 /* JDBridgeBasePluginPrivate.h in Headers */,
+				5630790EB475D2F1647EFCAF0DDA4819 /* JDBridgeManager.h in Headers */,
+				02BA08F3A17D8D38808DE3FE0F2400C1 /* JDBridgeManagerPrivate.h in Headers */,
+				745FBAABDDE079F52E882D48BE41C2CF /* JDBridgePluginUtils.h in Headers */,
+				F44D2E960BE536062DBDA375F652AB14 /* JDHybrid.h in Headers */,
+				8EA9FCB13E6E065ECA46DDF0E08625D1 /* JDHybrid-umbrella.h in Headers */,
+				59DAE4F5B5380D58748A9B1FC85AF055 /* XWebView.h in Headers */,
+				410204C1EF0454F2FC085903096B0FAE /* XWebViewContainer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1D552A7A8B78A7074AE1CA9576689744 /* Pods-JDHybrid_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB6D7529B56FBE25FE403D2A1E3AB90B /* Build configuration list for PBXNativeTarget "Pods-JDHybrid_Example" */;
+			buildPhases = (
+				6A0B0DB36607F4D1E3307C8FA1B0CBCE /* Headers */,
+				6FCEBCE6544F44DD408C4817F45C80D6 /* Sources */,
+				38450D7994C6C62971B58CB012497342 /* Frameworks */,
+				30A5B22B5F29B385AA20C1AEC8A039EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7208A8BC8413FA84B9A53AD0FB910D53 /* PBXTargetDependency */,
+			);
+			name = "Pods-JDHybrid_Example";
+			productName = "Pods-JDHybrid_Example";
+			productReference = 562FB22AD4F774F437B1C2996CD429ED /* Pods_JDHybrid_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CDE5FB45CE072A84460E40D4997B517F /* JDHybrid */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C35195C70C0903EBFF046749F357CAB /* Build configuration list for PBXNativeTarget "JDHybrid" */;
+			buildPhases = (
+				B8F032C8536DB0A6723B6F51668A5C29 /* Headers */,
+				908749DFACF0B25F884031490FFA0E2E /* Sources */,
+				95ADAF8780A5897B6E5E5B7AAF7A3B7E /* Frameworks */,
+				171D840622928255B3BC12D93D19B67D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JDHybrid;
+			productName = JDHybrid;
+			productReference = FD10486F53B2685F07B4E52F3DDBC27F /* JDHybrid.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 6FE7BFA7DB25A9D0805BE8388CB79E81 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDE5FB45CE072A84460E40D4997B517F /* JDHybrid */,
+				1D552A7A8B78A7074AE1CA9576689744 /* Pods-JDHybrid_Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		171D840622928255B3BC12D93D19B67D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30A5B22B5F29B385AA20C1AEC8A039EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6FCEBCE6544F44DD408C4817F45C80D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6314B892B4A0C5D7D023DC7206603E8 /* Pods-JDHybrid_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		908749DFACF0B25F884031490FFA0E2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B67971648430827E4B4613D987C8E672 /* _jdbridge.m in Sources */,
+				FF917E3C2125211FCCA22B3BABC6B005 /* JDBridgeBasePlugin.m in Sources */,
+				40F9790E5EB9EEA909253BD450F42378 /* JDBridgeManager.m in Sources */,
+				8F5F110BC8D9EC707FD6BE5ADE3538F1 /* JDBridgePluginUtils.m in Sources */,
+				A7A51C96196197AA6207B9FF605F7C4F /* JDHybrid-dummy.m in Sources */,
+				98E82D327831763AF8FA2583C4AB6CD5 /* XWebViewContainer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7208A8BC8413FA84B9A53AD0FB910D53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JDHybrid;
+			target = CDE5FB45CE072A84460E40D4997B517F /* JDHybrid */;
+			targetProxy = DAB23F200F08DC03A5D6623F8597FE0B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0B2272663656D637782F6B18674C80A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 428294BD6F2F367E7A3096547F7E708E /* Pods-JDHybrid_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		80CAA55E2B721ED9262B938740EC4389 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D19F34296898C92E65A53FE81CF998E /* JDHybrid.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/JDHybrid/JDHybrid-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JDHybrid/JDHybrid-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JDHybrid/JDHybrid.modulemap";
+				PRODUCT_MODULE_NAME = JDHybrid;
+				PRODUCT_NAME = JDHybrid;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B992768DFDF27AAB478F95E0E81B214A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D19F34296898C92E65A53FE81CF998E /* JDHybrid.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/JDHybrid/JDHybrid-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JDHybrid/JDHybrid-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JDHybrid/JDHybrid.modulemap";
+				PRODUCT_MODULE_NAME = JDHybrid;
+				PRODUCT_NAME = JDHybrid;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C14E932D4C3EFCC589F7DEABCEC18F22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		E8D3982AFDC6C7BF5691F7CB9D79C3E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88CE3CAACBB6F40CF92F4AA695884040 /* Pods-JDHybrid_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EF3BAAA889B17377BE8F3254633FA0A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF3BAAA889B17377BE8F3254633FA0A7 /* Debug */,
+				C14E932D4C3EFCC589F7DEABCEC18F22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C35195C70C0903EBFF046749F357CAB /* Build configuration list for PBXNativeTarget "JDHybrid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B992768DFDF27AAB478F95E0E81B214A /* Debug */,
+				80CAA55E2B721ED9262B938740EC4389 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB6D7529B56FBE25FE403D2A1E3AB90B /* Build configuration list for PBXNativeTarget "Pods-JDHybrid_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8D3982AFDC6C7BF5691F7CB9D79C3E7 /* Debug */,
+				0B2272663656D637782F6B18674C80A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

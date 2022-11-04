@@ -1,0 +1,8 @@
+{
+  "name": "jdhybrid_jdbridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./JDBridge.js",
+  "author": "jdhybrid",
+  "license": "MIT"
+}
