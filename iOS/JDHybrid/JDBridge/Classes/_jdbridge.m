@@ -60,13 +60,13 @@ SOFTWARE.
     }
     if([action isEqualToString:@"_respondFromJs"]){
         if (![JDBridgePluginUtils validateDictionary:params]) {
-            NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey:@"返回数据类型错误"}];
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey:@"Data type not supported"}];
             if ([self.delegate respondsToSelector:@selector(jsbridgeResponseWithCallbackId:params:error:)]) {
                 [self.delegate jsbridgeResponseWithCallbackId:nil params:nil error:error];
             }
         }
-        NSString *status = params[@"status"];
-        NSString *callbackId = params[@"callbackId"];
+        NSString *status = params[KJDBridgeStatus];
+        NSString *callbackId = params[KJDBridgeCallbackId];
 
         if ([status isEqualToString:@"0"]) {
             if ([self.delegate respondsToSelector:@selector(jsbridgeResponseWithCallbackId:params:error:)]) {

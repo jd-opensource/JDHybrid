@@ -31,6 +31,7 @@ SOFTWARE.
 #import "JDBridgeBasePlugin.h"
 #import "JDBridgeManagerPrivate.h"
 #import "JDBridgeBasePluginPrivate.h"
+#import "_jdbridge.h"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
@@ -126,8 +127,8 @@ static NSString *KJDBridgeInnerMethod = @"window.JDBridge && window.JDBridge._ha
         }
     }
     
-    if ([plugin isKindOfClass:NSClassFromString(@"_jdbridge")]) {
-        [plugin performSelector:@selector(setJDBridgeDelegate:) withObject:self.jdBridgeInnerDelegate];
+    if ([plugin isKindOfClass:[_jdbridge class]]) {
+        [(_jdbridge *)plugin setJDBridgeDelegate:self.jdBridgeInnerDelegate];
     }
     
     if ([plugin respondsToSelector:@selector(excute:params:callback:)]) {

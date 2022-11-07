@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// eg.
 ///  messageHandler is@[@"XWebView"] .
 /// window.webkit.messageHandlers.XWebView.postMessage(obj) can invoke
-/// we had remove messagehandlers in it
+/// we had remove messagehandlers while JDBridgeManager dealloc
 /// @param messageHanders  messageHandlers
 - (void)addScriptMessageHandlers:(NSArray<NSString *> *)messageHanders;
 
