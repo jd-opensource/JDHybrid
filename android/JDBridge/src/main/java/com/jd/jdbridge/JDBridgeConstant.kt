@@ -37,16 +37,10 @@ object JDBridgeConstant {
     const val JS_RESPOND_TO_WEB = "window.JDBridge._handleResponseFromNative(%s)"
 
     const val JS_DISPATCH_EVENT =
-        "if (window.jdhybridBridgeDispatchEvent == undefined || typeof window.jdhybridBridgeDispatchEvent != 'function') {" +
-            "window.jdhybridBridgeDispatchEvent = function jdhybridBridgeDispatchEvent(eventName, eventParams) {" +
-                "if (eventName) {" +
-                    "var jdBridgeEvent = new CustomEvent(eventName, { detail: eventParams });" +
-                    "window.dispatchEvent(jdBridgeEvent);" +
-                "}" +
-                "console && console.log('JDBridge:dispatchEvent [' + eventName + '], params = ' + eventParams);" +
-            "}" +
-        "}" +
-        "window.jdhybridBridgeDispatchEvent('%s', %s);"
+        ";(function(){" +
+            "var event = new CustomEvent('%s', {'detail': %s}); " +
+            "window.dispatchEvent(event);" +
+        "})();"
 
     const val JS_ALERT_DEBUG_MSG = "alert('JDBridge Debug Msg: %s')"
 
