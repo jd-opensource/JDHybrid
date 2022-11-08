@@ -18,7 +18,7 @@ Gradle
 模块 `build.gradle`
 
 ```groovy
-	implementation 'com.github.JDHybrid.JDHybridTmp:XWebView:1.0.0'
+	implementation 'com.github.JDFED.JDHybrid:XWebView:1.0.0'
 ```
 
 ## 使用

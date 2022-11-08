@@ -24,7 +24,7 @@ Gradle
 模块 `build.gradle`
 
 ```groovy
-	implementation 'com.github.JDHybrid.JDHybridTmp:JDBridge:1.0.0'
+	implementation 'com.github.JDFED.JDHybrid:JDBridge:1.0.0'
 ```
 
 ## 原生Native使用
