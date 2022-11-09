@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'maven-publish'
+}
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 31
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$ktCoroutineVer"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$ktCoroutineVer"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$ktCoroutineVer"
+    implementation 'androidx.annotation:annotation:1.1.0'
+    api project(':JDBridge')
+
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.jd.libs'
+            artifactId = "$artifactId"
+            version = "$version"
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+//        debug(MavenPublication) {
+//            groupId = 'com.jd.libs'
+//            artifactId = "$artifactId"
+//            version = "$version-SNAPSHOT"
+//
+//            afterEvaluate {
+//                from components.debug
+//            }
+//        }
+    }
+}

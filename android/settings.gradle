@@ -1,0 +1,4 @@
+rootProject.name = "JDHybrid"
+include ':Example'
+include ':JDBridge'
+include ':JDWebView'

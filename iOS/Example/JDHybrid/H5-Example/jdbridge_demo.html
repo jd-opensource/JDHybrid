@@ -1,0 +1,230 @@
+<!--
+// MIT License
+// 
+// Copyright (c) 2022 JD.com, Inc.
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// -->
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=11, user-scalable=1">
+    <title>
+        JDBridge Demo
+    </title>
+    <style type="text/css" rel="stylesheet">
+        body {
+            /*background-color: green;*/
+            font-family: "幼圆", "微软雅黑", "黑体";
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .contanier {
+            position: relative;
+            top: 80px;
+        }
+
+        .myText {
+            border-radius: 2px;
+            width: 95%;
+            display: block;
+            margin: 5px auto auto auto;
+        }
+
+        .button {
+            background-color: #FF6347;
+            width: 90%;
+            /* height: 32px; */
+            /*margin-top: 10px;*/
+            line-height: 15px;
+            text-align: center;
+            color: #fff;
+            border-radius: 2px;
+            margin: 3px auto auto auto;
+        }
+    </style>
+<script defer src="bundle.js"></script></head>
+
+<body>
+    <p>
+        <input type="button" class="button" id="addSyncJsPlugin" value="Add Sync JS Plugin" onclick="addSyncJsPlugin();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="addAsyncJsPlugin" value="Add Async JS Plugin" onclick="addAsyncJsPlugin();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="addSequenceJsPlugin" value="Add Sequence JS Plugin" onclick="addSequenceJsPlugin();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="addSequenceJsPlugin" value="Add Default JS Plugin" onclick="addDefaultJsPlugin();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="testCallNative" value="Call Native Plugin" onclick="testCallNative();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="testCallSequenceNative" value="Call Sequence Native Plugin" onclick="testCallSequenceNative();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="testCallDefaultNative" value="Call Default Native Plugin" onclick="testCallDefaultNative();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="testCallNativeOld" value="Call Native (Old Method)" onclick="testCallNativeOld();" />
+    </p>
+    <p>
+        <input type="button" class="button" id="testReload" value="Reload Web Page" onclick="window.location.reload()" />
+    </p>
+    <p>
+        <xmp class="myText" id="showLog"></xmp>
+    </p>
+</body>
+
+<script>
+    function showLog(log) {
+        
+        var logElem = document.getElementById("showLog")
+        logElem.innerHTML = log + '\n------\n' + logElem.innerHTML
+    }
+
+    function addSyncJsPlugin() {
+        showLog('Add JS plugin \'MySyncJsPlugin\', so native can call.')
+        JDBridge.registerPlugin('MySyncJsPlugin', function (params) {
+            showLog('MySyncJsPlugin invoked by native, params = ' + JSON.stringify(params))
+            return 'MySyncJsPlugin returns ' + JSON.stringify(params)
+        })
+    }
+
+    function addAsyncJsPlugin() {
+        showLog('Add JS plugin \'MyAsyncJsPlugin\', so native can call.')
+        JDBridge.registerPlugin('MyAsyncJsPlugin', function (params, callback) {
+            showLog('MyAsyncJsPlugin invoked by native, params = ' + JSON.stringify(params))
+            callback('MyAsyncJsPlugin returns ' + JSON.stringify(params))
+        })
+    }
+
+    function addSequenceJsPlugin() {
+        showLog('Add JS plugin \'MySequenceJsPlugin\', so native can call.')
+        JDBridge.registerPlugin('MySequenceJsPlugin', function (params, callback) {
+            showLog('MySequenceJsPlugin invoked by native, params = ' + JSON.stringify(params))
+            var time = 0
+            var timer = setInterval(function () {
+                var complete = false
+                time++
+                if (time == 10) {
+                    clearInterval(timer)
+                    complete = true
+                }
+                callback((time * 10) + '%, MySequenceJsPlugin returns ' + JSON.stringify(params), true, complete)
+            }, 500)
+        })
+    }
+
+    function addDefaultJsPlugin() {
+        showLog('Add default JS plugin, so native can call without name.')
+        JDBridge.registerDefaultPlugin(function (params, callback) {
+            showLog('Default JS plugin invoked by native, params = ' + JSON.stringify(params))
+            callback('Default JS plugin returns ' + JSON.stringify(params))
+        })
+    }
+
+    function testCallNative() {
+        showLog('Call Native plugin \'MyNativePlugin\'.')
+        var params = { a: 1, b: 'CallNative', c: 'https://m.jd.com?abc=123#f', d: 'js\'s test' }
+        var callback = function (result) {
+            showLog('Received result from MyNativePlugin, result = ' + result)
+        }
+        JDBridge.callNative('MyNativePlugin', {action: 'MyAction', params: params, success: callback})
+    }
+
+    function testCallSequenceNative() {
+        showLog('Call Native plugin \'MySequenceNativePlugin\'.')
+        var params = { a: 1, b: 'CallSequenceNative', c: 'https://m.jd.com?abc=123#f', d: 'js\'s test' }
+        var successCallback = function (result) {
+            showLog('Received success from MySequenceNativePlugin, result = ' + result)
+        }
+        var progressCallback = function (result, response) {
+            showLog('Received progress from MySequenceNativePlugin, complete = ' + response.complete + ', msg = ' + response.msg + ', result = ' + result)
+        }
+        JDBridge.callNative({name: 'MySequenceNativePlugin', params: params, success: successCallback, progress: progressCallback})
+    }
+
+    function testCallDefaultNative() {
+        showLog('Call Default Native.')
+        var params = { a: 1, b: 'CallDefaultNative', c: 'https://m.jd.com?abc=123#f', d: 'js\'s test' }
+        var callback = function (result, response) {
+            showLog('Received result from native, complete = ' + response.complete + ', msg = ' + response.msg + ', result = ' + result)
+        }
+        JDBridge.callNative({params: params, success: callback})
+    }
+
+    function testCallNativeOld() {
+        showLog('Call Native(Old method).')
+        var params = { a: 1, b: 'CallNativeOld', c: 'https://m.jd.com?abc=123#f', d: 'js\'s test' }
+        window.oldCallback = function (jsonStr) {
+            showLog('Received result from native old, jsonStr = ' + jsonStr)
+        }
+        window.XWebView.callNative('GlobalJDBridgePlugin', 'action', JSON.stringify(params), 'oldCallback', '000')
+    }
+
+    function bridgeLog(logContent) {
+        document.getElementById("show").innerHTML += logContent + '\n';
+    }
+
+    function connectJDBridge(callback) {
+        if (window.JDBridge) {
+            callback(JDBridge)
+        } else {
+            window.addEventListener(
+                'JDBridgeReady',
+                function () {
+                    callback(JDBridge)
+                },
+                false
+            );
+        }
+    }
+
+    connectJDBridge(function (bridge) {
+        JDBridge.setDebug(true);
+        showLog('JDBridge JS is ready.')
+        if (!JDBridge.nativeReady()) {
+            showLog('JDBridge\'s native environment is NOT Found.')
+        }
+    })
+
+    window.addEventListener('ContainerShow', function (event) {
+        showLog('received ContainerShow event')
+    })
+
+    window.addEventListener('ContainerHide', function (event) {
+        showLog('received ContainerHide event')
+    })
+
+    window.addEventListener('ContainerActive', function (event) {
+        showLog('received ContainerActive event')
+    })
+
+    window.addEventListener('ContainerInactive', function (event) {
+        showLog('received ContainerInactive event')
+    })
+
+</script>
+
+</html>

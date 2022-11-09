@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'maven-publish'
+}
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 31
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$ktCoroutineVer"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$ktCoroutineVer"
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def name = properties.getProperty('username')
+def pw = properties.getProperty('password')
+def releasesRepoUrl = properties.getProperty('releaseUrl')
+def snapshotsRepoUrl = properties.getProperty('snapshotsUrl')
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+publishing {
+    repositories {
+        maven {
+            allowInsecureProtocol true
+            credentials{
+                username name
+                password pw
+            }
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl: releasesRepoUrl
+        }
+    }
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.jd.libs'
+            artifactId = "$artifactId"
+            version = "$version"
+
+            artifact(androidSourcesJar)//打包源码到aar，使宿主可调试
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}

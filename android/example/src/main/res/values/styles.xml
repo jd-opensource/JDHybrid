@@ -1,0 +1,15 @@
+<resources>
+
+    <style name="Widget.Theme.JDHybrid.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="Widget.Theme.JDHybrid.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="Widget.Theme.JDHybrid.Fab" parent="Widget.AppCompat.ActionBar">
+        <item name="colorAccent">@color/purple_500</item>
+    </style>
+</resources>

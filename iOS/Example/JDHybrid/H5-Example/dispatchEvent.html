@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.addEventListener('hhh',function(event){
+            alert(event.name)
+        }, false);
+        window.addEventListener('AppShow', function(event){
+            alert(event);
+        }, false);
+        window.addEventListener('ContainerShow', function(event){
+            alert(event);
+        }, false);
+        window.addEventListener('ContainerHide', function(event){
+            alert(event);
+        }, false);
+        window.onload = function(){
+            console.log("onload" + new Date().getTime());
+        }
+   </script>
+</head>
+<body>
+    <div>alert test</div>
+</body>
+</html>
