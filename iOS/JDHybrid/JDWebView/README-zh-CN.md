@@ -99,17 +99,17 @@ JDWebView提供了容器WebView继承了UIView，并添加了WKWebView作为子V
 ### WebView delegate （基于WKNavigationDelegate与UIDelegate）
 
 ```objective-c
-- (void)webView:(WebView *)webView beforeDecidePolicyForNavigationAction:(WKNavigationAction *)navigationAction;
-- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
-- (void)webView:(WebView *)webView afterDecidePolicyForNavigationAction:(WKNavigationAction *)navigationAction;
-- (void)webView:(WebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler;
-- (void)webView:(WebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
-- (void)webView:(WebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
-- (void)webView:(WebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
-- (void)webView:(WebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
-- (void)webView:(WebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation;
-- (void)webView:(WebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
-- (void)webView:(WebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
-- (void)webViewWebContentProcessDidTerminate:(WebView *)webView;
-- (void)webViewDidClose:(WebView *)webView;
+- (void)webView:(JDWebViewContainer *)webView beforeDecidePolicyForNavigationAction:(WKNavigationAction *)navigationAction;
+- (void)webView:(JDWebViewContainer *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
+- (void)webView:(JDWebViewContainer *)webView afterDecidePolicyForNavigationAction:(WKNavigationAction *)navigationAction;
+- (void)webView:(JDWebViewContainer *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler;
+- (void)webView:(JDWebViewContainer *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
+- (void)webView:(JDWebViewContainer *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
+- (void)webView:(JDWebViewContainer *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
+- (void)webView:(JDWebViewContainer *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
+- (void)webView:(JDWebViewContainer *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation;
+- (void)webView:(JDWebViewContainer *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
+- (void)webView:(JDWebViewContainer *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler;
+- (void)webViewWebContentProcessDidTerminate:(JDWebViewContainer *)webView;
+- (void)webViewDidClose:(JDWebViewContainer *)webView; //when js call window.close;
 ```
