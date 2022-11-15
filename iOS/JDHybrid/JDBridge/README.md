@@ -100,11 +100,13 @@ e.g:
 
 @implementation MyNativePlugin
 
-- (void)excute:(NSString *)action params:(NSDictionary *)params callback:(JDBridgeCallBack *)jsBridgeCallback{
+- (BOOL)excute:(NSString *)action params:(NSDictionary *)params callback:(JDBridgeCallBack *)jsBridgeCallback{
     NSLog(@"%@,%@",action,params);
     if (jsBridgeCallback.onSuccess) {
         jsBridgeCallback.onSuccess(@"Hello, I am Native");
+        return YES;
     }
+    return NO;
 }
 
 @end
@@ -120,7 +122,7 @@ e.g:
 
 @implementation MySequenceNativePlugin
 
-- (void)excute:(NSString *)action params:(NSDictionary *)params callback:(JDBridgeCallBack *)jsBridgeCallback{
+- (BOOL)excute:(NSString *)action params:(NSDictionary *)params callback:(JDBridgeCallBack *)jsBridgeCallback{
     __block float progress = 0.0;
     __block NSInteger index = 0;
     NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -132,6 +134,7 @@ e.g:
         }
     }];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    return YES;
 }
 
 @end
