@@ -3,7 +3,7 @@
 JDHybrid是一个移动端高性能Hybrid容器框架，致力于提升h5加载与渲染性能、WebView容器标准化，项目经过了亿级PV的业务验证， 项目主要包括：
 
 * jsbridge --- JDBridge
-* 集成了离线加载能力与jsbridge能力的WebView容器 --- JDWebView
+* 集成各种开源能力的WebView容器 --- JDWebView
 * 离线包加载框架 --- JDCache (即将开源)
 
 

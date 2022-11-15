@@ -6,14 +6,13 @@ JDHybrid is a High-Performance hybrid framework for mobile apps, which is commit
 
 * `JDBridge`: A JSbridge Framework
 * `JDWebView`: WebView container integrating `JDBridge` capability and other features
-* Offline package generating Tool
 
 
 
 <h2>Get Started</h2>
 
 <h3>JSBridge</h3>
-JSBridge(JDBridge) includes two parts --- jssdk & client framework. First, h5 installs jssdk to support bridge environment. Then app client integrates JDBridge framework. Finally creating js plugins or native plugins calling one another. For more detail, please read below:
+JSBridge(JDBridge) includes two parts --- jssdk & client framework. First, you can install jssdk to support bridge environment. Then app client integrates JDBridge framework. Finally creating js plugins or native plugins calling one another. For more detail, please read below:
 
 * [H5 JSBridge](H5/JDBridge/README.md)
 * [iOS JSBridge](iOS/JDHybrid/JDBridge/README.md)
