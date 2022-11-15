@@ -82,16 +82,6 @@ NS_ASSUME_NONNULL_BEGIN
         injectionTime:(WKUserScriptInjectionTime)injectTime
      forMainFrameOnly:(BOOL)onlyForMainFrame;
 
-/// load a request
-/// @param request request
-- (void)loadRequest:(NSURLRequest *)request;
-
-/// load a file
-/// @param URL file url
-/// @param readAccessURL for security, specify a url webview can load
-- (void)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL;
-
-
 /// if had history
 - (BOOL)canGoBack;
 
@@ -109,6 +99,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// isloading?
 - (BOOL)isLoading;
+
+@end
+
+@interface JDWebViewContainer (Load)
+
+/// load a url string
+/// @param urlString urlstring
+- (void)loadURLString:(NSString *)urlString;
+
+
+/// load a nsurl
+/// @param url url
+- (void)loadURL:(NSURL *)url;
+
+/// load a request
+/// @param request request
+- (void)loadRequest:(NSURLRequest *)request;
+
+/// load a file
+/// @param URL file url
+/// @param readAccessURL for security, specify a url webview can load
+- (void)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL;
+
 
 @end
 

@@ -132,14 +132,6 @@ typedef void(^WebKitAlertBlock)(void);
     [self.realWebView.configuration.userContentController addUserScript:userscript];
 }
 
-- (void)loadRequest:(NSURLRequest *)request{
-    [_realWebView loadRequest:request];
-}
-
-- (void)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL{
-    [_realWebView loadFileURL:URL allowingReadAccessToURL:readAccessURL];
-}
-
 - (void)setCustomUserAgent:(NSString *)customUserAgent{
     _realWebView.customUserAgent = customUserAgent;
 }
@@ -184,6 +176,42 @@ typedef void(^WebKitAlertBlock)(void);
     else{
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+
+#pragma mark --- Load
+
+- (void)loadURLString:(NSString *)urlString{
+    NSString *realStr = [urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSURL *url = [NSURL URLWithString:realStr];
+    
+    //FixMe: url not encode
+    if (!url) {
+        NSData *data = [realStr dataUsingEncoding:NSUTF8StringEncoding];//polyfill
+        if (data){
+            url = [NSURL URLWithDataRepresentation:data relativeToURL:nil];
+        }
+    }
+    
+    if (!url || ![url.scheme hasPrefix:@"http"]) {
+        return;
+    }
+    
+    [self loadURL:url];
+}
+
+
+- (void)loadURL:(NSURL *)url{
+    [self loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+
+- (void)loadRequest:(NSURLRequest *)request{
+    [_realWebView loadRequest:request];
+}
+
+- (void)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL{
+    [_realWebView loadFileURL:URL allowingReadAccessToURL:readAccessURL];
 }
 
 #pragma mark -- jdWebView JSBridge

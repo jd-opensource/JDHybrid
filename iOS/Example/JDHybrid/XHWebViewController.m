@@ -57,7 +57,7 @@ SOFTWARE.
         [_webView loadFileURL:fileUrl allowingReadAccessToURL:fileUrl];
         return;
     }
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:XHLoadURL]]];
+    [_webView loadURLString:XHLoadURL];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
