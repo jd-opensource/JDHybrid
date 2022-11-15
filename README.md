@@ -4,8 +4,8 @@
 
 JDHybrid is a High-Performance hybrid framework for mobile apps, which is committed to improve the loading and rendering performance of H5 and the standardization of WebView containers. The project has been verified more fully by dozens of h5 projects in JD. Our projects mainly include:
 
-* `JDBridge`: JSbridge
-* `JDWebView`: WebView container integrating jsbridge capability
+* `JDBridge`: A JSbridge Framework
+* `JDWebView`: WebView container integrating `JDBridge` capability and other features
 * Offline package generating Tool
 
 
