@@ -23,8 +23,8 @@ JDHybrid 提供了支持JDBridge的容器，未来还会支持离线加载能力
 
 <h3>更多使用方式</h3>
 
+* [h5 Demo](H5/JDBridge/Example) 进入[H5/JDBridge/Example](H5/JDBridge/Example)下执行 `npm install && npm run build` , 打开 `dist` 文件夹内的html即可, 客户端试用下面Demo前也请先安装h5 demo，我们会自动copy产物到Example内
 * [iOS Demo](iOS/Example) 进入[iOS/Example](/iOS/Example)文件夹，执行 `pod install` 
-
 * [Android Demo ](android/example)进入[android](/android)文件夹，执行`./gradlew installDebug`
 
 <h2>Contributing</h2>
