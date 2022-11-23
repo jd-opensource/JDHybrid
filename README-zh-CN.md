@@ -11,7 +11,7 @@ JDHybrid是一个移动端高性能Hybrid容器框架，致力于提升h5加载�
 <h3>使用JSBridge</h3>
 JSBridge(JDBridge) 包含jssdk部分与客户端部分，使用时js先引入JSSDK(见下文), 并添加js插件供native调用，或通过jssdk api调用native插件，使用方式参考：
 
-* [JS JSBridge](H5/README-zh-CN.md)
+* [H5 JSBridge](H5/JDBridge/README-zh-CN.md)
 * [iOS JSBridge](iOS/JDHybrid/JDBridge/README-zh-CN.md)
 * [Android JSBridge](android/JDBridge/README-zh-CN.md)
 
