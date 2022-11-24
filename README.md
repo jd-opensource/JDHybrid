@@ -1,3 +1,8 @@
+[![npm](https://img.shields.io/npm/v/jdhybrid_jdbridge)](https://www.npmjs.com/package/jdhybrid_jdbridge)
+[![Cocoapods](https://img.shields.io/cocoapods/v/JDHybrid)](https://cocoapods.org/pods/JDHybrid)
+[![Cocoapods](https://img.shields.io/cocoapods/l/JDHybrid)](https://cocoapods.org/pods/JDHybrid)
+[![Cocoapods platforms](https://img.shields.io/cocoapods/p/JDHybrid)](https://github.com/JDFED/JDHybrid)
+
 > [简体中文文档](README-zh-CN.md)
 
 <h2>Introduction</h2>
