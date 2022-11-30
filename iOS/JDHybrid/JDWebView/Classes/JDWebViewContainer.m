@@ -94,6 +94,11 @@ typedef void(^WebKitAlertBlock)(void);
     [_realWebView removeObserver:self forKeyPath:@"title"];
     [_realWebView removeObserver:self forKeyPath:@"URL"];
     
+    _realWebView.UIDelegate = nil;
+    _realWebView.navigationDelegate = nil;
+    _realWebView.scrollView.delegate = nil;
+    [_realWebView.configuration.userContentController removeAllUserScripts];
+    
     if (_alertBlock) _alertBlock();
     if (_confirmBlock) _confirmBlock();
     if (_textInputBlock) _textInputBlock();
