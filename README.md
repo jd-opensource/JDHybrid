@@ -1,7 +1,4 @@
-[![npm](https://img.shields.io/npm/v/jdhybrid_jdbridge)](https://www.npmjs.com/package/jdhybrid_jdbridge)
-[![Cocoapods](https://img.shields.io/cocoapods/v/JDHybrid)](https://cocoapods.org/pods/JDHybrid)
-[![Cocoapods](https://img.shields.io/cocoapods/l/JDHybrid)](https://cocoapods.org/pods/JDHybrid)
-[![Cocoapods platforms](https://img.shields.io/cocoapods/p/JDHybrid)](https://github.com/JDFED/JDHybrid)
+[![MIT](https://img.shields.io/github/license/JDFED/JDHybrid)](https://cocoapods.org/pods/JDHybrid) [![npm](https://img.shields.io/npm/v/jdhybrid_jdbridge)](https://www.npmjs.com/package/jdhybrid_jdbridge) [![Cocoapods](https://img.shields.io/cocoapods/v/JDHybrid)](https://cocoapods.org/pods/JDHybrid) [![Cocoapods platforms](https://img.shields.io/cocoapods/p/JDHybrid)](https://github.com/JDFED/JDHybrid) [![JitPack](https://img.shields.io/jitpack/version/com.github.JDFED/JDHybrid)](https://jitpack.io/#JDFED/JDHybrid) [![Android](https://img.shields.io/badge/platform-Android-green)](https://github.com/JDFED/JDHybrid)
 
 > [简体中文文档](README-zh-CN.md)
 
