@@ -122,6 +122,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param readAccessURL for security, specify a url webview can load
 - (void)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL;
 
+/// load htmlstring
+/// @param htmlString htmlstring
+/// @param baseURL htmlstring location
+- (void)loadHTMLString:(nonnull NSString *)htmlString baseURL:(nullable NSURL *)baseURL;
 
 @end
 

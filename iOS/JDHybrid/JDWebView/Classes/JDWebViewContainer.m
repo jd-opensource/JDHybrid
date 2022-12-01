@@ -219,6 +219,10 @@ typedef void(^WebKitAlertBlock)(void);
     [_realWebView loadFileURL:URL allowingReadAccessToURL:readAccessURL];
 }
 
+- (void)loadHTMLString:(nonnull NSString *)htmlString baseURL:(nullable NSURL *)baseURL{
+    [_realWebView loadHTMLString:htmlString baseURL:baseURL];
+}
+
 #pragma mark -- jdWebView JSBridge
 
 - (void)registerDefaultPlugin:(JDBridgeBasePlugin *)defaultJsPlugin{
