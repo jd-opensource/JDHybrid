@@ -167,15 +167,15 @@ typedef void(^WebKitAlertBlock)(void);
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqualToString:@"estimatedProgress"] && [change[NSKeyValueChangeNewKey] isKindOfClass:[NSNumber class]])
+    if([keyPath isEqualToString:@"estimatedProgress"])
     {
         self.estimatedProgress = [change[NSKeyValueChangeNewKey] doubleValue];
     }
-    else if([keyPath isEqualToString:@"title"] && [change[NSKeyValueChangeNewKey] isKindOfClass:[NSString class]])
+    else if([keyPath isEqualToString:@"title"])
     {
         self.title = change[NSKeyValueChangeNewKey];
     }
-    else if ([keyPath isEqualToString:@"URL"] && [change[NSKeyValueChangeNewKey] isKindOfClass:[NSURL class]]){
+    else if ([keyPath isEqualToString:@"URL"]){
         self.URL = change[NSKeyValueChangeNewKey];
     }
     else{
