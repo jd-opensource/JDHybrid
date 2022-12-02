@@ -31,6 +31,9 @@ SOFTWARE.
     if (jsBridgeCallback.onSuccess) {
         jsBridgeCallback.onSuccess(@"Hello, I am Native");
     }
+    
+    NSLog(@"%@", [jsBridgeCallback webViewController]);
+    
     return YES;
 }
 

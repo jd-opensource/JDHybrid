@@ -133,6 +133,16 @@ SOFTWARE.
     }
 }
 
+#pragma mark --- return webview controller
+
+- (UIViewController *)webViewController{
+    id vc = self.webview;
+    while (vc && ![vc isKindOfClass:[UIViewController class]]) {
+        vc = [vc nextResponder];
+    }
+    return [vc isKindOfClass:[UIViewController class]]? vc : nil;
+}
+
 @end
 
 @interface JDBridgeBasePlugin()

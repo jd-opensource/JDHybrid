@@ -74,7 +74,10 @@ typedef void(^ErrorCallBack)(NSError *error);
 /// fail block, return an error
 @property(nonatomic, copy, readonly)ErrorCallBack                           onFail;
 
+/// return the webviewcontroller
+@property(nonatomic, strong, readonly)UIViewController                      *webViewController;
 
 @end
+
 
 NS_ASSUME_NONNULL_END
