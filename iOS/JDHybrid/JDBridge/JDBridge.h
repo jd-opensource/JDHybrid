@@ -25,9 +25,10 @@ SOFTWARE.
 #ifndef JDBJSBridgeCommonHeader_h
 #define JDBJSBridgeCommonHeader_h
 
-#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
+#if __has_include(<JDHybrid/JDBridge/JDBridge.h>)
 #import <JDHybrid/JDBridgeBasePlugin.h>
 #else
+#import <JDHybrid/JDBridgeBasePlugin.h>
 #import "JDBridgeBasePlugin.h"
 #import "JDBridgeManager.h"
 #endif
