@@ -23,11 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
-#import <JDHybrid/JDBridgeBasePlugin.h>
-#else
+
 #import "JDBridgeBasePlugin.h"
-#endif
 
 
 NS_ASSUME_NONNULL_BEGIN

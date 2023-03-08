@@ -26,12 +26,9 @@ SOFTWARE.
 
 
 #import <Foundation/Foundation.h>
-#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
-#import <JDHybrid/JDBridgeBasePlugin.h>
-#else
 #import "JDBridgeBasePlugin.h"
-#endif
 #import <WebKit/WebKit.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// An Object to manager jsbridge
