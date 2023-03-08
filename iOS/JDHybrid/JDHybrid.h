@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #import <Foundation/Foundation.h>
-#if __has_include(<JDHybrid/JDHybrid.h>)
+#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
 #import <JDHybrid/JDBridge.h>
 #import <JDHybrid/JDWebView.h>
 #else

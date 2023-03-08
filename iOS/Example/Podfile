@@ -3,5 +3,5 @@ use_frameworks!
 platform :ios, '9.0'
 
 target 'JDHybrid_Example' do
-  pod 'JDHybrid', :path => '../'
+  pod 'JDHybrid', :path => '../../'
 end
