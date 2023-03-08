@@ -26,19 +26,19 @@ TODO: Add long description of the pod here.
   s.author           = { 'JDHybrid' => 'jdapp-webview@jd.com' }
   s.source           = { :git => 'https://github.com/JDFED/JDHybrid.git', :tag => s.version.to_s }
   s.ios.deployment_target = '9.0'
-  s.source_files = 'JDHybrid/JDHybrid.h'
+  s.source_files = 'iOS/JDHybrid/JDHybrid.h'
   s.subspec 'JDBridge' do |a|
-    a.source_files = 'JDHybrid/JDBridge/*.{h,m}'
-    a.public_header_files = 'JDHybrid/JDBridge/JDBridgeBasePlugin.h',
-                            'JDHybrid/JDBridge/JDBridgeManager.h',
-                            'JDHybrid/JDBridge/JDBridge.h'
+    a.source_files = 'iOS/JDHybrid/JDBridge/**/*.{h,m}'
+    a.public_header_files = 'iOS/JDHybrid/JDBridge/Classes/JDBridgeBasePlugin.h',
+                            'iOS/JDHybrid/JDBridge/Classes/JDBridgeManager.h',
+                            'iOS/JDHybrid/JDBridge/JDBridge.h'
     a.frameworks = 'WebKit','UIKit','Foundation'
   end
 
   s.subspec 'JDWebView' do |c|
-    c.source_files = 'JDHybrid/JDWebView/*.{h,m}'
-    c.public_header_files = 'JDHybrid/JDWebView/JDWebViewContainer.h',
-                            'JDHybrid/JDWebView/JDWebView.h'
+    c.source_files = 'iOS/JDHybrid/JDWebView/**/*.{h,m}'
+    c.public_header_files = 'iOS/JDHybrid/JDWebView/Classes/JDWebViewContainer.h',
+                            'iOS/JDHybrid/JDWebView/JDWebView.h'
     c.frameworks = 'WebKit','UIKit','Foundation'
     c.dependency 'JDHybrid/JDBridge'
   end
