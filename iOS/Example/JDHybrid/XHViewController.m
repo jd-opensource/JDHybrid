@@ -23,55 +23,70 @@ SOFTWARE.
  */
 
 #import "XHViewController.h"
-#import "XHWebViewController.h"
-#import <JDHybrid/JDHybrid-umbrella.h>
+#import "JDWebViewController.h"
+#import "JDCacheViewController.h"
 
 @interface XHViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray <NSDictionary *>* dataSource;
-
-/// 预加载
-@property (nonatomic, assign) BOOL isPreload;
-
-
 @end
 
 @implementation XHViewController
 
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"JDHybrid";
-    _dataSource = [NSMutableArray array];
-    CGFloat y = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
-    CGSize size = UIScreen.mainScreen.bounds.size;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y, size.width, size.height - y) style:UITableViewStylePlain];
+    self.title = @"JDHybrid-demo";
+    
     if (@available(iOS 13.0, *)) {
-        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
         [appearance configureWithDefaultBackground];
         self.navigationController.navigationBar.standardAppearance = appearance;
         self.navigationController.navigationBar.scrollEdgeAppearance = appearance;
     }
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    [self.view addSubview:_tableView];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    
     __weak typeof(self)weakSelf = self;
-    [self addGroupTitle:@"非拦截" subTitles:@[
-        @"JDWebView"
+    [self addGroupTitle:@"JDHybrid" subTitles:@[
+        @"JDWebView&JDBridge", @"JDCache"
     ] actionBlock:^(NSInteger index) {
         __strong typeof(weakSelf)self = weakSelf;
         if (!self) return;
-        XHWebViewController *vc = [XHWebViewController new];
-        vc.loadLocalFile = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        switch (index) {
+            case 0:
+            {
+                JDWebViewController *vc = [JDWebViewController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 1:
+            {
+                JDCacheViewController *vc = [JDCacheViewController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+        }
+        
     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
+
+- (void)addGroupTitle:(NSString*)title
+            subTitles:(NSArray<NSString*>*)subTitles
+          actionBlock:(void (^)(NSInteger index))actionBlock{
+    [self.dataSource addObject:@{
+        @"title":title?:@"",
+        @"subTitles":subTitles?:@"",
+        @"action":actionBlock?:^(NSInteger index){}
+    }];
+}
+
+#pragma mark -
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataSource.count;
@@ -93,7 +108,7 @@ SOFTWARE.
         label.textAlignment = NSTextAlignmentLeft;
     }
     UILabel *label = [view viewWithTag:50];
-    label.text = [NSString stringWithFormat:@"Tips%ld--%@",section + 1,self.dataSource[section][@"title"]];
+    label.text = [NSString stringWithFormat:@"%@",self.dataSource[section][@"title"]];
     return view;
 }
 
@@ -124,12 +139,25 @@ SOFTWARE.
     }
 }
 
-- (void)addGroupTitle:(NSString*)title subTitles:(NSArray<NSString*>*)subTitles actionBlock:(void (^)(NSInteger index))actionBlock{
-    [self.dataSource addObject:@{
-        @"title":title?:@"",
-        @"subTitles":subTitles?:@"",
-        @"action":actionBlock?:^(NSInteger index){}
-    }];
+
+#pragma mark -
+- (UITableView *)tableView {
+    if (!_tableView) {
+        CGFloat y = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+        CGSize size = UIScreen.mainScreen.bounds.size;
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y, size.width, size.height - y) style:UITableViewStylePlain];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+    }
+    return _tableView;
+}
+
+- (NSMutableArray<NSDictionary *> *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
 }
 
 

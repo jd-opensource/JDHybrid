@@ -1,24 +1,31 @@
 PODS:
-  - JDHybrid (1.0.3):
-    - JDHybrid/JDBridge (= 1.0.3)
-    - JDHybrid/JDCache (= 1.0.3)
-    - JDHybrid/JDWebView (= 1.0.3)
-  - JDHybrid/JDBridge (1.0.3)
-  - JDHybrid/JDCache (1.0.3):
+  - JDHybrid (1.0.4):
+    - JDHybrid/JDBridge (= 1.0.4)
+    - JDHybrid/JDCache (= 1.0.4)
+    - JDHybrid/JDWebView (= 1.0.4)
+  - JDHybrid/JDBridge (1.0.4)
+  - JDHybrid/JDCache (1.0.4):
     - JDHybrid/JDBridge
-  - JDHybrid/JDWebView (1.0.3):
+  - JDHybrid/JDWebView (1.0.4):
     - JDHybrid/JDBridge
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - JDHybrid (from `../../`)
+  - YYCache
+
+SPEC REPOS:
+  trunk:
+    - YYCache
 
 EXTERNAL SOURCES:
   JDHybrid:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  JDHybrid: 5a90349af44177d4353005373ddd5b69fc8c7679
+  JDHybrid: fd4569dd931a92e26b49df51392dc1a2895bf05f
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 66f4f3674d4811d6ba7245fb222cdcf3dab568c6
+PODFILE CHECKSUM: b3f10b648df03d1f4e1fe5248206e9cff5ad2f05
 
 COCOAPODS: 1.8.3

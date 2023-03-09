@@ -29,8 +29,13 @@
 		B05242012914E9A200F981F6 /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = B05241FF2914E9A200F981F6 /* bundle.js */; };
 		B057F79C286ECED4006E75B1 /* dispatchEvent.html in Resources */ = {isa = PBXBuildFile; fileRef = B057F79B286ECED4006E75B1 /* dispatchEvent.html */; };
 		D4BAD97214589C19D4CE376C /* Pods_JDHybrid_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2249E01521726C41DE2DF153 /* Pods_JDHybrid_Example.framework */; };
+		EF75D52029B9AE3900E594D3 /* JDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF75D51F29B9AE3900E594D3 /* JDWebViewController.m */; };
+		EF75D52329B9AE5F00E594D3 /* JDCacheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF75D52229B9AE5F00E594D3 /* JDCacheViewController.m */; };
+		EF75D52629B9AE7500E594D3 /* JDCacheWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF75D52529B9AE7500E594D3 /* JDCacheWebViewController.m */; };
+		EF75D52929B9B39200E594D3 /* JDMapResourceMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EF75D52829B9B39200E594D3 /* JDMapResourceMatcher.m */; };
+		EF75D57E29B9C4AA00E594D3 /* resource in Resources */ = {isa = PBXBuildFile; fileRef = EF75D57D29B9C4AA00E594D3 /* resource */; };
+		EF75D58429B9C51500E594D3 /* XHCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EF75D58329B9C51500E594D3 /* XHCache.m */; };
 		FD1DA0AB2843B521006E7674 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1DA0AA2843B521006E7674 /* ExternalAccessory.framework */; };
-		FD53F837283F603D005CA71D /* XHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD53F836283F603D005CA71D /* XHWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,10 +86,19 @@
 		B05241FE2914E9A200F981F6 /* jdbridge_demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = jdbridge_demo.html; sourceTree = "<group>"; };
 		B05241FF2914E9A200F981F6 /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
 		B057F79B286ECED4006E75B1 /* dispatchEvent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dispatchEvent.html; sourceTree = "<group>"; };
+		EF75D51E29B9AE3900E594D3 /* JDWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JDWebViewController.h; sourceTree = "<group>"; };
+		EF75D51F29B9AE3900E594D3 /* JDWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JDWebViewController.m; sourceTree = "<group>"; };
+		EF75D52129B9AE5F00E594D3 /* JDCacheViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JDCacheViewController.h; sourceTree = "<group>"; };
+		EF75D52229B9AE5F00E594D3 /* JDCacheViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JDCacheViewController.m; sourceTree = "<group>"; };
+		EF75D52429B9AE7500E594D3 /* JDCacheWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JDCacheWebViewController.h; sourceTree = "<group>"; };
+		EF75D52529B9AE7500E594D3 /* JDCacheWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JDCacheWebViewController.m; sourceTree = "<group>"; };
+		EF75D52729B9B39200E594D3 /* JDMapResourceMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDMapResourceMatcher.h; sourceTree = "<group>"; };
+		EF75D52829B9B39200E594D3 /* JDMapResourceMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDMapResourceMatcher.m; sourceTree = "<group>"; };
+		EF75D57D29B9C4AA00E594D3 /* resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resource; sourceTree = "<group>"; };
+		EF75D58229B9C51500E594D3 /* XHCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHCache.h; sourceTree = "<group>"; };
+		EF75D58329B9C51500E594D3 /* XHCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHCache.m; sourceTree = "<group>"; };
 		FD1DA0A92843B521006E7674 /* JDHybrid_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JDHybrid_Example.entitlements; sourceTree = "<group>"; };
 		FD1DA0AA2843B521006E7674 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
-		FD53F835283F603D005CA71D /* XHWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHWebViewController.h; sourceTree = "<group>"; };
-		FD53F836283F603D005CA71D /* XHWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XHWebViewController.m; sourceTree = "<group>"; };
 		FDE14D69284B9AF7003D85EE /* XHDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XHDefine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +166,11 @@
 		6003F593195388D20070C39A /* Example for JDHybrid */ = {
 			isa = PBXGroup;
 			children = (
+				EF75D58229B9C51500E594D3 /* XHCache.h */,
+				EF75D58329B9C51500E594D3 /* XHCache.m */,
+				EF75D57D29B9C4AA00E594D3 /* resource */,
+				EF75D52729B9B39200E594D3 /* JDMapResourceMatcher.h */,
+				EF75D52829B9B39200E594D3 /* JDMapResourceMatcher.m */,
 				B05241FD2914E9A100F981F6 /* H5-Example */,
 				B006A2592893B8E7009DB690 /* JDBridgeDemo */,
 				6003F59C195388D20070C39A /* XHAppDelegate.h */,
@@ -159,8 +178,12 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* XHViewController.h */,
 				6003F5A6195388D20070C39A /* XHViewController.m */,
-				FD53F835283F603D005CA71D /* XHWebViewController.h */,
-				FD53F836283F603D005CA71D /* XHWebViewController.m */,
+				EF75D51E29B9AE3900E594D3 /* JDWebViewController.h */,
+				EF75D51F29B9AE3900E594D3 /* JDWebViewController.m */,
+				EF75D52129B9AE5F00E594D3 /* JDCacheViewController.h */,
+				EF75D52229B9AE5F00E594D3 /* JDCacheViewController.m */,
+				EF75D52429B9AE7500E594D3 /* JDCacheWebViewController.h */,
+				EF75D52529B9AE7500E594D3 /* JDCacheWebViewController.m */,
 				FDE14D69284B9AF7003D85EE /* XHDefine.h */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -254,7 +277,7 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				F4762A5553BBB4051F1FB068 /* [CP] Embed Pods Frameworks */,
+				4C1CDA3275F0EE53C896F800 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -327,6 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF75D57E29B9C4AA00E594D3 /* resource in Resources */,
 				B057F79C286ECED4006E75B1 /* dispatchEvent.html in Resources */,
 				B05242002914E9A200F981F6 /* jdbridge_demo.html in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
@@ -348,6 +372,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4C1CDA3275F0EE53C896F800 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JDHybrid/JDHybrid.framework",
+				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDHybrid.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A3571C9C099EAB787DDA5372 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -370,24 +414,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F4762A5553BBB4051F1FB068 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JDHybrid/JDHybrid.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDHybrid.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -396,10 +422,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* XHAppDelegate.m in Sources */,
+				EF75D58429B9C51500E594D3 /* XHCache.m in Sources */,
 				B006A2622893BEF0009DB690 /* MySequenceNativePlugin.m in Sources */,
+				EF75D52629B9AE7500E594D3 /* JDCacheWebViewController.m in Sources */,
+				EF75D52929B9B39200E594D3 /* JDMapResourceMatcher.m in Sources */,
 				B006A25C2893B91F009DB690 /* MyNativePlugin.m in Sources */,
+				EF75D52029B9AE3900E594D3 /* JDWebViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* XHViewController.m in Sources */,
-				FD53F837283F603D005CA71D /* XHWebViewController.m in Sources */,
+				EF75D52329B9AE5F00E594D3 /* JDCacheViewController.m in Sources */,
 				B006A25F2893BAF0009DB690 /* MyDefaultPlugin.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
@@ -538,7 +568,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/JDHybrid/JDHybrid.framework/Headers\"",
-					"\"$(SRCROOT)\"/**",
 				);
 				INFOPLIST_FILE = "JDHybrid/JDHybrid-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -547,6 +576,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
+				USE_HEADERMAP = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -565,7 +595,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/JDHybrid/JDHybrid.framework/Headers\"",
-					"\"$(SRCROOT)\"/**",
 				);
 				INFOPLIST_FILE = "JDHybrid/JDHybrid-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -574,6 +603,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
+				USE_HEADERMAP = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

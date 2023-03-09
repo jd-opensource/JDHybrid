@@ -27,6 +27,7 @@ SOFTWARE.
 #import <Foundation/Foundation.h>
 #import "JDBridge.h"
 #import "JDWebView.h"
+#import "JDCache.h"
 
 
 

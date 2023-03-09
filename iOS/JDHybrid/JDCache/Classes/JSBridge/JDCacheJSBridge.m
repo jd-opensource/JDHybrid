@@ -7,6 +7,7 @@
 
 #import "JDCacheJSBridge.h"
 #import "JDUtils.h"
+#import "JDBridge.h"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \

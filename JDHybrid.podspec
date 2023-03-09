@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JDHybrid'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'A short description of JDHybrid.'
 
 # This description is used to generate tags and improve search results.
@@ -42,10 +42,12 @@ TODO: Add long description of the pod here.
     }
     b.public_header_files = 'iOS/JDHybrid/JDCache/Classes/JDCache.h',
                             'iOS/JDHybrid/JDCache/Classes/JDCacheProtocol.h',
-                            'iOS/JDHybrid/JDCache/Configure/JDCacheLoader.h',
-                            'iOS/JDHybrid/JDCache/Configure/WKWebViewConfiguration+Loader.h',
-                            'iOS/JDHybrid/JDCache/Preload/JDCachePreload.h',
-                            'iOS/JDHybrid/JDCache/Utils/JDUtils.h',
+                            'iOS/JDHybrid/JDCache/Classes/Configure/JDCacheLoader.h',
+                            'iOS/JDHybrid/JDCache/Classes/Configure/WKWebViewConfiguration+Loader.h',
+                            'iOS/JDHybrid/JDCache/Classes/Preload/JDCachePreload.h',
+                            'iOS/JDHybrid/JDCache/Classes/Utils/JDUtils.h',
+                            'iOS/JDHybrid/JDCache/Classes/Utils/JDSafeDictionary.h',
+                            'iOS/JDHybrid/JDCache/Classes/Utils/JDSafeArray.h',
     b.frameworks = 'WebKit','UIKit','Foundation'
     b.dependency 'JDHybrid/JDBridge'
   end

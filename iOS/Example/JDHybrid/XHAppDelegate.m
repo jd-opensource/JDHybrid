@@ -23,18 +23,26 @@ SOFTWARE.
  */
 
 #import "XHAppDelegate.h"
-
-
+#import "XHCache.h"
+#import <JDHybrid/JDHybrid-umbrella.h>
 
 @interface XHAppDelegate ()
-@property (nonatomic, strong) WKWebView * webView;
+@property (nonatomic, strong) XHCache *xhCache;
 @end
+
 @implementation XHAppDelegate
+
+- (XHCache *)xhCache {
+    if (!_xhCache) {
+        _xhCache = [[XHCache alloc] initWithName:@"com.jd.jdhybridcache"];
+    }
+    return _xhCache;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:[WKWebViewConfiguration new]];
-    // Override point for customization after application launch.
+    [JDCache shareInstance].netCache = self.xhCache;
+    [JDCache shareInstance].LogEnabled = YES;
     return YES;
 }
 
