@@ -6,8 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import <JDHybrid/JDCacheProtocol.h>
-#import <JDCacheProtocol.h>
+#import "JDCacheProtocol.h"
 #import "JDCacheLoader.h"
 #import "WKWebViewConfiguration+Loader.h"
 #import "JDCachePreload.h"
@@ -22,9 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (JDCache *)shareInstance;
 
-@property (nonatomic, strong) id <JDURLCacheDelegate> netCache;
+@property (nonatomic, strong) id <JDURLCacheDelegate> netCache; // 网络数据缓存
 
-@property (nonatomic, assign) BOOL LogEnabled;
+@property (nonatomic, assign) BOOL LogEnabled; // log开关
 
 @end
 

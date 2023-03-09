@@ -11,7 +11,6 @@
 #import "JDHybrid.h"
 #import "JDCache.h"
 #import <JDHybrid/JDHybrid-umbrella.h>
-//#import "JDHybrid-umbrella.h"
 
 @interface JDCacheWebViewController ()
 @property (nonatomic, strong) WKWebView * webView;
@@ -35,12 +34,15 @@
             break;
         case JDCacheH5LoadTypeNativeNetwork:
         {
+            // 开启Hybrid能力
             configuration.loader.enable = YES;
         }
             break;
         case JDCacheH5LoadTypeLocalResource:
         {
+            // 开启Hybrid能力
             configuration.loader.enable = YES;
+            // 设置匹配器
             NSString *rootPath = [[NSBundle mainBundle] pathForResource:@"resource" ofType:@""];
             if ([[NSFileManager defaultManager] fileExistsAtPath:rootPath]) {
                 JDMapResourceMatcher *mapResourceMatcher = [[JDMapResourceMatcher alloc] initWithRootPath:rootPath];
@@ -50,12 +52,15 @@
             break;
         case JDCacheH5LoadTypeLocalResourceAndPreload:
         {
+            // 开启Hybrid能力
             configuration.loader.enable = YES;
+            // 设置匹配器
             NSString *rootPath = [[NSBundle mainBundle] pathForResource:@"resource" ofType:@""];
             if ([[NSFileManager defaultManager] fileExistsAtPath:rootPath]) {
                 JDMapResourceMatcher *mapResourceMatcher = [[JDMapResourceMatcher alloc] initWithRootPath:rootPath];
                 configuration.loader.matchers = @[mapResourceMatcher];
             }
+            // 开启HTML预加载
             JDCachePreload *preload = [JDCachePreload new];
             NSURLRequest *preloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:XHLoadURL]];
             NSMutableURLRequest *requestM = [preloadRequest mutableCopy];
@@ -71,16 +76,20 @@
             break;
         case JDCacheH5LoadTypeLocalDegrade:
         {
+            // 开启Hybrid能力
             configuration.loader.enable = YES;
+            // 设置匹配器
             NSString *rootPath = [[NSBundle mainBundle] pathForResource:@"resource" ofType:@""];
             if ([[NSFileManager defaultManager] fileExistsAtPath:rootPath]) {
                 JDMapResourceMatcher *mapResourceMatcher = [[JDMapResourceMatcher alloc] initWithRootPath:rootPath];
                 configuration.loader.matchers = @[mapResourceMatcher];
             }
+            // 模拟1s后降级
             __weak typeof(self)weakSelf = self;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 JDCacheLog(@"开启降级，url: %@", XHLoadURL);
                 __strong typeof(weakSelf)self = weakSelf;
+                // 降级开关，设置为Yes后将不匹配离线资源
                 configuration.loader.degrade = YES;
                 [self.webView reload];
             });

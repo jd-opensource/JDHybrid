@@ -11,8 +11,10 @@
                 var message = {};
                 message["cookie"] = cookstr;
                 message["url"] = document.location.href;
-                if (webkit && webkit.messageHandlers && webkit.messageHandlers.JDHybrid && webkit.messageHandlers.JDHybrid.postMessage) {
-                    webkit.messageHandlers.JDHybrid.postMessage({
+                if (webkit && webkit.messageHandlers &&
+                    webkit.messageHandlers.JDCache &&
+                    webkit.messageHandlers.JDCache.postMessage) {
+                    webkit.messageHandlers.JDCache.postMessage({
                         method: "syncCookie",
                         params: message
                     })
@@ -389,8 +391,8 @@
                         var message = {};
                         message["cookie"] = cookieStr;
                         message["url"] = document.location.href;
-                        if (webkit && webkit.messageHandlers && webkit.messageHandlers.JDHybrid && webkit.messageHandlers.JDHybrid.postMessage) {
-                            webkit.messageHandlers.JDHybrid.postMessage({
+                        if (webkit && webkit.messageHandlers && webkit.messageHandlers.JDCache && webkit.messageHandlers.JDCache.postMessage) {
+                            webkit.messageHandlers.JDCache.postMessage({
                                 method: "syncCookie",
                                 params: message
                             })

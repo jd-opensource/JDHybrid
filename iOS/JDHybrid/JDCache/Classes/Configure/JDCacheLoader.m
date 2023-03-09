@@ -122,8 +122,8 @@ static void *JDCacheConfigurationKey = &JDCacheConfigurationKey;
 
 - (void)registerJSBridge {
     if (@available(iOS LimitVersion, *)) {
-        [self.configuration.userContentController removeScriptMessageHandlerForName:@"JDHybrid"];
-        [self.configuration.userContentController addScriptMessageHandler:self.jsbridge name:@"JDHybrid"];
+        [self.configuration.userContentController removeScriptMessageHandlerForName:@"JDCache"];
+        [self.configuration.userContentController addScriptMessageHandler:self.jsbridge name:@"JDCache"];
     }
 }
 

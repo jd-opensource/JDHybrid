@@ -26,5 +26,6 @@ SOFTWARE.
 #define XHDefine_h
 
 #define XHLoadURL @"https://m.jd.com"
+//#define XHLoadURL @"https://huishou.m.jd.com/index"
 
 #endif /* XHDefine_h */

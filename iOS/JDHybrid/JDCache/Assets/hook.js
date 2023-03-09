@@ -594,7 +594,7 @@
         return window._JDXHRealxhr
     }
     function JDHybridPostMethodToIos(params) {
-        window.webkit.messageHandlers.JDHybrid.postMessage({
+        window.webkit.messageHandlers.JDCache.postMessage({
             method: "fetchPostReuqestWithParams",
             params: params
         })

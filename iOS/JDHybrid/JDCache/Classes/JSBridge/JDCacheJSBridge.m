@@ -141,7 +141,7 @@ _Pragma("clang diagnostic pop") \
 
 - (void)userContentController:(nonnull WKUserContentController *)userContentController
       didReceiveScriptMessage:(nonnull WKScriptMessage *)message {
-    if ([message.name isEqualToString:@"JDHybrid"]) {
+    if ([message.name isEqualToString:@"JDCache"]) {
         self.webView = message.webView;
         NSDictionary *body = message.body;
         if (!JDValidDic(body)) {
@@ -239,9 +239,7 @@ _Pragma("clang diagnostic pop") \
         }
         headersM[@"Cookie"] = [obj copy];
     }
-    
-//    headers[@"aHlicmlk"] = @"1";
-    
+        
     NSString *ua = self.webView.customUserAgent;
     if (JDValidStr(ua)) {
         headersM[@"User-Agent"] = ua?:@"";
