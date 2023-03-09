@@ -14,10 +14,6 @@
     @import UIKit;
     @import Foundation;
 #import "XHDefine.h"
-#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
-#import <JDHybrid/JDHybrid-umbrella.h>
-#else
 #import "JDHybrid.h"
-#endif
 
 #endif

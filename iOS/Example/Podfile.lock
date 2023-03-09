@@ -1,0 +1,24 @@
+PODS:
+  - JDHybrid (1.0.3):
+    - JDHybrid/JDBridge (= 1.0.3)
+    - JDHybrid/JDCache (= 1.0.3)
+    - JDHybrid/JDWebView (= 1.0.3)
+  - JDHybrid/JDBridge (1.0.3)
+  - JDHybrid/JDCache (1.0.3):
+    - JDHybrid/JDBridge
+  - JDHybrid/JDWebView (1.0.3):
+    - JDHybrid/JDBridge
+
+DEPENDENCIES:
+  - JDHybrid (from `../../`)
+
+EXTERNAL SOURCES:
+  JDHybrid:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  JDHybrid: 5a90349af44177d4353005373ddd5b69fc8c7679
+
+PODFILE CHECKSUM: 66f4f3674d4811d6ba7245fb222cdcf3dab568c6
+
+COCOAPODS: 1.8.3

@@ -35,6 +35,21 @@ TODO: Add long description of the pod here.
     a.frameworks = 'WebKit','UIKit','Foundation'
   end
 
+  s.subspec 'JDCache' do |b|
+    b.source_files = 'iOS/JDHybrid/JDCache/**/*.{h,m}'
+    b.resource_bundles = {
+      'JDCache' => ['iOS/JDHybrid/JDCache/Assets/*.js']
+    }
+    b.public_header_files = 'iOS/JDHybrid/JDCache/Classes/JDCache.h',
+                            'iOS/JDHybrid/JDCache/Classes/JDCacheProtocol.h',
+                            'iOS/JDHybrid/JDCache/Configure/JDCacheLoader.h',
+                            'iOS/JDHybrid/JDCache/Configure/WKWebViewConfiguration+Loader.h',
+                            'iOS/JDHybrid/JDCache/Preload/JDCachePreload.h',
+                            'iOS/JDHybrid/JDCache/Utils/JDUtils.h',
+    b.frameworks = 'WebKit','UIKit','Foundation'
+    b.dependency 'JDHybrid/JDBridge'
+  end
+  
   s.subspec 'JDWebView' do |c|
     c.source_files = 'iOS/JDHybrid/JDWebView/**/*.{h,m}'
     c.public_header_files = 'iOS/JDHybrid/JDWebView/Classes/JDWebViewContainer.h',
@@ -42,4 +57,5 @@ TODO: Add long description of the pod here.
     c.frameworks = 'WebKit','UIKit','Foundation'
     c.dependency 'JDHybrid/JDBridge'
   end
+
 end

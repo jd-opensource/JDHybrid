@@ -23,11 +23,7 @@ SOFTWARE.
  */
 
 #import "XHWebViewController.h"
-#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
 #import <JDHybrid/JDHybrid-umbrella.h>
-#else
-#import "JDHybrid.h"
-#endif
 #import "MyDefaultPlugin.h"
 
 @interface XHWebViewController ()<WebViewDelegate>

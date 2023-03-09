@@ -535,6 +535,11 @@
 				DEVELOPMENT_TEAM = 5KQQLB9477;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JDHybrid/JDHybrid-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JDHybrid/JDHybrid.framework/Headers\"",
+					"\"$(SRCROOT)\"/**",
+				);
 				INFOPLIST_FILE = "JDHybrid/JDHybrid-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
@@ -557,6 +562,11 @@
 				DEVELOPMENT_TEAM = 5KQQLB9477;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JDHybrid/JDHybrid-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JDHybrid/JDHybrid.framework/Headers\"",
+					"\"$(SRCROOT)\"/**",
+				);
 				INFOPLIST_FILE = "JDHybrid/JDHybrid-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;

@@ -24,11 +24,8 @@ SOFTWARE.
 
 #import "XHViewController.h"
 #import "XHWebViewController.h"
-#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
 #import <JDHybrid/JDHybrid-umbrella.h>
-#else
-#import "JDHybrid.h"
-#endif
+
 @interface XHViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray <NSDictionary *>* dataSource;
