@@ -47,8 +47,12 @@ configuration.loader.enable = YES;
    
     ```objc
     @protocol JDResourceMatcherImplProtocol <NSObject>
+    // 说明：此api根据传入的NSURLRequest实例，需返回是否拦截处理。
     - (BOOL)canHandleWithRequest:(NSURLRequest *)request;
 
+    // 说明：此api根据传入的NSURLRequest实例，回调response、data、fail或success等数据。
+    // * 若API`canHandleWithRequest:`返回YES，此API需要正常回调数据；
+    // * 若API`canHandleWithRequest:`返回NO，则此API不会被调用。
     - (void)startWithRequest:(NSURLRequest *)request
             responseCallback:(JDNetResponseCallback)responseCallback
                 dataCallback:(JDNetDataCallback)dataCallback
@@ -57,26 +61,6 @@ configuration.loader.enable = YES;
             redirectCallback:(JDNetRedirectCallback)redirectCallback;
     @end
     ```
-    api说明：
-
-    ```objc
-    - (BOOL)canHandleWithRequest:(NSURLRequest *)request;
-    ```
-
-    此api根据传入的NSURLRequest实例，需返回是否拦截处理。
-
-    ```objc
-    - (void)startWithRequest:(NSURLRequest *)request
-            responseCallback:(JDNetResponseCallback)responseCallback
-                dataCallback:(JDNetDataCallback)dataCallback
-                failCallback:(JDNetFailCallback)failCallback
-            successCallback:(JDNetSuccessCallback)successCallback
-            redirectCallback:(JDNetRedirectCallback)redirectCallback;
-    ```
-    
-    此api根据传入的NSURLRequest实例，回调response、data、fail或success等数据。
-    * 若API`canHandleWithRequest:`返回YES，此API需要正常回调数据；
-    * 若API`canHandleWithRequest:`返回NO，则此API不会被调用。
 
 2. 设置匹配器数组，例如：
 
