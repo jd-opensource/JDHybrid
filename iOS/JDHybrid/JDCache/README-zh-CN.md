@@ -4,7 +4,12 @@
 [![License](https://img.shields.io/cocoapods/l/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/JDCache)
 [![Platform](https://img.shields.io/cocoapods/p/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/JDCache)
 
-JDCache iOS端内部使用WKURLSchemeHandler协议，通过拦截所有http/https的请求，匹配本地离线资源。JDCache中提供HTML预加载能力，并且内置了HTML匹配器和网络请求匹配器，只需使用者实现自己的离线匹配逻辑。
+JDCache iOS端是基于[WKURLSchemeHandler](https://developer.apple.com/documentation/webkit/wkurlschemehandler)协议设计，通过拦截http/https的请求，来匹配本地离线资源，加快H5页面加载速度。有如下特点：
++ 代码无侵入
++ H5业务接入无改造成本
++ 灵活、可自定义的匹配策略
+
+JDCache还提供了HTML预加载能力，并且内置了HTML匹配器和网络请求匹配器，使用者只需实现自己的离线匹配逻辑。
 
 
 ## 依赖
@@ -15,7 +20,7 @@ JDCache 支持 [CocoaPods](https://cocoapods.org) 安装使用，仅需要在您
 pod 'JDHybrid/JDCache'
 ```
 
-参考下面教程创建测试离线包
+可参考下面教程创建测试离线包
 
 [离线包生成](../../../nodejs/README.md)
 
@@ -100,5 +105,20 @@ configuration.loader.preload = preload;
 ```
 
 设置完成后，在JDCache拦截到此HTML的请求后会优先使用预加载数据。
+
+## 原理介绍
+#### 一. 配置开启
+通过`configuration.loader.enable = YES;`开启hybrid能力时，自动注册`schemeHander`、注册js桥、注入必要的js。
+
+#### 二. 拦截匹配
+使用`WKURLSchemeHandler`协议拦截每个请求，转发到`configuration.loader.matchers`中依次匹配，若匹配器命中，返回给WebView，此次匹配流程终止。
+若都未命中，使用内置的网络匹配器（JDNetworkResourceMatcher），发起网络请求。
+
+![iOS匹配流程图](../../../doc/iOS_resource_match.png)
+
+#### 三. HTML预加载匹配
+使用`JDCachePreload`预先发起HTML下载，下载的数据保存到HTML匹配器（JDPreloadHtmlMatcher）中。拦截到请求后，优先查找HTML预加载匹配器。
+
+![iOSHTML匹配流程图](../../../doc/ios_resource_match_html.png)
 
 
