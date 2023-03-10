@@ -121,4 +121,7 @@ configuration.loader.preload = preload;
 
 ![iOSHTML匹配流程图](../../../doc/ios_resource_match_html.png)
 
+#### 四. 非离线资源匹配
+由于`WKURLSchemeHandler`协议拦截了WebView所有http/https请求，所以JDCache构建了强大的网络框架，来处理非离线资源的请求、缓存和匹配逻辑。
+![iOSHTML匹配流程图](../../../doc/ios_resource_match_net.png)
 
