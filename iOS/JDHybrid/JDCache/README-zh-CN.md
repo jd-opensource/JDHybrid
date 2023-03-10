@@ -22,15 +22,12 @@ pod 'JDHybrid/JDCache'
 ## 基本使用
 
 #### 一、初始化JDCache
-JDCache使用单例创建，并设置netCache网络缓存代理。netCache实例需满足JDURLCacheDelegate协议，推荐使用YYCache。
+APP启动时初始化JDCache，设置netCache网络缓存代理、是否开启日志。
+* netCache 用于缓存网络资源，遵守[http标准缓存协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching)。实例需满足JDURLCacheDelegate协议，推荐使用YYCache。
 
 ```objc
-@protocol JDURLCacheDelegate <NSObject>
-- (void)setObject:(id<NSCoding>)object forKey:(NSString *)key;
-- (id<NSCoding>)objectForKey:(NSString *)key;
-- (void)removeObjectForKey:(NSString *)key;
-- (void)removeAllObjects;
-@end
+[JDCache shareInstance].netCache = self.xhCache;
+[JDCache shareInstance].LogEnabled = YES;
 ```
 
 #### 二、开启Hybrid
@@ -41,13 +38,8 @@ JDCache使用单例创建，并设置netCache网络缓存代理。netCache实例
 configuration.loader.enable = YES;
 ```
 
-注意：此代码必须在使用configuration创建WKWebView实例之前才生效，例如：
+* 注意：此代码必须在使用configuration创建WKWebView实例之前设置才生效
 
-```objc
-WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
-configuration.loader.enable = YES;
-WKWebView *webview = [WKWebView initWithFrame:frame configuration:configuration];
-```
 
 #### 三、创建匹配器
 
@@ -71,7 +63,7 @@ WKWebView *webview = [WKWebView initWithFrame:frame configuration:configuration]
     - (BOOL)canHandleWithRequest:(NSURLRequest *)request;
     ```
 
-    此api根据传入的NSURLRequest实例，需返回是否拦截处理。若返回YES，需要在下一个api回调response、data、fail或success等数据。若返回NO，则会传递给下一个匹配器处理。
+    此api根据传入的NSURLRequest实例，需返回是否拦截处理。
 
     ```objc
     - (void)startWithRequest:(NSURLRequest *)request
@@ -82,13 +74,16 @@ WKWebView *webview = [WKWebView initWithFrame:frame configuration:configuration]
             redirectCallback:(JDNetRedirectCallback)redirectCallback;
     ```
     
-    此api根据传入的NSURLRequest实例，回调response、data、fail或success等数据。上一个api若返回YES，此api需要正常回调数据；若返回NO，则此api不会被调用。
+    此api根据传入的NSURLRequest实例，回调response、data、fail或success等数据。
+    * 若API`canHandleWithRequest:`返回YES，此API需要正常回调数据；
+    * 若API`canHandleWithRequest:`返回NO，则此API不会被调用。
 
-2. 将所有的匹配器，以数组的形式赋值给JDCacheLoader实例的matchers字段，JDCache在拦截到请求时，会按顺序依次传递给数组中的匹配器去处理。例如：
+2. 设置匹配器数组，例如：
 
     ```objc
     configuration.loader.matchers = @[mapResourceMatcher,aaaResourceMatcher,bbbResourceMatcher];
     ```
+    * 将所有的匹配器，以数组的形式赋值给JDCacheLoader实例的matchers字段，JDCache在拦截到请求时，会按顺序依次传递给数组中的匹配器去处理。
 
 ## 更多使用
 

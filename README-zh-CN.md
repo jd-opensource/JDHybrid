@@ -21,6 +21,11 @@ JDHybrid 提供了支持JDBridge的容器，未来还会支持离线加载能力
 * [iOS WebView容器](iOS/JDHybrid/JDWebView/README-zh-CN.md)
 * [Android WebView容器](android/JDWebView/README-zh-CN.md)
 
+<h3>使用JDCache</h3>
+
+* [iOS JDCache](iOS/JDHybrid/JDCache/README-zh-CN.md)
+* Android 待更新
+
 <h3>更多使用方式</h3>
 
 * [h5 Demo](H5/JDBridge/Example) 进入[H5/JDBridge/Example](H5/JDBridge/Example)下执行 `npm install && npm run build` , 打开 `dist` 文件夹内的html即可, 客户端试用下面Demo前也请先安装h5 demo，我们会自动copy产物到Example内
