@@ -114,7 +114,7 @@ configuration.loader.preload = preload;
 使用`WKURLSchemeHandler`协议拦截每个请求，转发到`configuration.loader.matchers`中依次匹配，若匹配器命中，返回给WebView，此次匹配流程终止。
 若都未命中，使用内置的网络匹配器（JDNetworkResourceMatcher），发起网络请求。
 
-![iOS匹配流程图](../../../doc/iOS_resource_match.png)
+![iOS匹配流程图](../../../doc/ios_resource_match.png)
 
 #### 三. HTML预加载匹配
 使用`JDCachePreload`预先发起HTML下载，下载的数据保存到HTML匹配器（JDPreloadHtmlMatcher）中。拦截到请求后，优先查找HTML预加载匹配器。
