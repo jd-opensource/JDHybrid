@@ -50,40 +50,32 @@ configuration.loader.enable = YES;
 
 1. 创建单个匹配器必须实现JDResourceMatcherImplProtocol协议
    
-    ```objc
-    @protocol JDResourceMatcherImplProtocol <NSObject>
-    // 说明：此api根据传入的NSURLRequest实例，需返回是否拦截处理。
-    - (BOOL)canHandleWithRequest:(NSURLRequest *)request;
+```objc
+@protocol JDResourceMatcherImplProtocol <NSObject>
+// 说明：此api根据传入的NSURLRequest实例，需返回是否拦截处理。
+- (BOOL)canHandleWithRequest:(NSURLRequest *)request;
 
-    // 说明：此api根据传入的NSURLRequest实例，回调response、data、fail或success等数据。
-    // * 若API`canHandleWithRequest:`返回YES，此API需要正常回调数据；
-    // * 若API`canHandleWithRequest:`返回NO，则此API不会被调用。
-    - (void)startWithRequest:(NSURLRequest *)request
-            responseCallback:(JDNetResponseCallback)responseCallback
-                dataCallback:(JDNetDataCallback)dataCallback
-                failCallback:(JDNetFailCallback)failCallback
-            successCallback:(JDNetSuccessCallback)successCallback
-            redirectCallback:(JDNetRedirectCallback)redirectCallback;
-    @end
-    ```
+// 说明：此api根据传入的NSURLRequest实例，回调response、data、fail或success等数据。
+// * 若API`canHandleWithRequest:`返回YES，此API需要正常回调数据；
+// * 若API`canHandleWithRequest:`返回NO，则此API不会被调用。
+- (void)startWithRequest:(NSURLRequest *)request
+        responseCallback:(JDNetResponseCallback)responseCallback
+            dataCallback:(JDNetDataCallback)dataCallback
+            failCallback:(JDNetFailCallback)failCallback
+        successCallback:(JDNetSuccessCallback)successCallback
+        redirectCallback:(JDNetRedirectCallback)redirectCallback;
+@end
+```
 
 2. 设置匹配器数组，例如：
 
-    ```objc
-    configuration.loader.matchers = @[mapResourceMatcher,aaaResourceMatcher,bbbResourceMatcher];
-    ```
-    * 将所有的匹配器，以数组的形式赋值给JDCacheLoader实例的matchers字段，JDCache在拦截到请求时，会按顺序依次传递给数组中的匹配器去处理。
+```objc
+configuration.loader.matchers = @[mapResourceMatcher,aaaResourceMatcher,bbbResourceMatcher];
+```
+
+* 将所有的匹配器，以数组的形式赋值给JDCacheLoader实例的matchers字段，JDCache在拦截到请求时，会按顺序依次传递给数组中的匹配器去处理。
 
 ## 更多使用
-
-#### 降级
-
-通过以下方法来降级：
-
-```objc
-configuration.loader.degrade = YES;
-```
-设置完成后，在本次的WebView加载中，将会全部走网络请求，不使用匹配器资源。
 
 #### HTML预加载
 
@@ -105,6 +97,15 @@ configuration.loader.preload = preload;
 ```
 
 设置完成后，在JDCache拦截到此HTML的请求后会优先使用预加载数据。
+
+#### 降级
+
+通过以下方法来降级：
+
+```objc
+configuration.loader.degrade = YES;
+```
+设置完成后，在本次的WebView加载中，将会全部走网络请求，不使用匹配器资源。
 
 ## 原理介绍
 #### 一. 配置开启
