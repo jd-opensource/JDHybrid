@@ -40,8 +40,9 @@ import com.jd.jdbridge.JDBridgeManager
 import com.jd.jdbridge.base.IBridgeWebView
 import com.jd.jdbridge.base.IProxy
 import com.jd.jdbridge.base.runOnMain
+import com.jd.jdcache.JDCacheWebView
 
-open class JDWebView : WebView, IBridgeWebView {
+open class JDWebView : WebView, IBridgeWebView, JDCacheWebView {
 
     companion object {
         @JvmStatic

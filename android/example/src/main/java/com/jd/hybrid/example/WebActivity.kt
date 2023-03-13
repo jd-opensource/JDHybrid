@@ -40,6 +40,7 @@ class WebActivity : AppCompatActivity() {
     private fun createFragment() {
         val fragment = when (intent.getStringExtra("pageType")) {
             "system" -> SysWebFragment()
+            "JDCache" -> JDCacheFragment()
             "JDBridge" -> JDBridgeFragment()
             else -> null
         }

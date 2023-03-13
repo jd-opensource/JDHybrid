@@ -26,13 +26,16 @@ package com.jd.hybrid.example
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.RadioGroup
 import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 
 class SettingActivity : AppCompatActivity() {
+
+    private lateinit var switchJDCache: SwitchMaterial
+    private lateinit var switchPreload: SwitchMaterial
+    private lateinit var switchCustomMatcher: SwitchMaterial
 
     private lateinit var groupUrl: RadioGroup
     private lateinit var checkUrl0: MaterialRadioButton
@@ -52,6 +55,9 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        switchJDCache = findViewById(R.id.switch_enable_jdcache)
+        switchPreload = findViewById(R.id.switch_preload)
+        switchCustomMatcher = findViewById(R.id.switch_custom_matcher)
 
         groupUrl = findViewById(R.id.rg_url)
         checkUrl0 = findViewById(R.id.url0)
@@ -69,6 +75,10 @@ class SettingActivity : AppCompatActivity() {
 
     private fun loadSetting() {
         val setting = Setting.settingData
+
+        switchJDCache.isChecked = setting.enableJDCache
+        switchPreload.isChecked = setting.preloadHtml
+        switchCustomMatcher.isChecked = setting.useCustomMatcher
         val checkUrlId = when (setting.urlIndex) {
             1 -> R.id.url1
             2 -> R.id.url2
@@ -103,6 +113,9 @@ class SettingActivity : AppCompatActivity() {
             }
         }
         Setting.settingData = Setting.SettingData(
+            switchJDCache.isChecked,
+            switchPreload.isChecked,
+            switchCustomMatcher.isChecked,
             urlIndex,
             url
         )

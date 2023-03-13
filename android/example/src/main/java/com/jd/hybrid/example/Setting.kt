@@ -24,13 +24,22 @@
  */
 package com.jd.hybrid.example
 
+import com.jd.jdcache.JDCache
+
 
 object Setting {
 
     var settingData: SettingData = SettingData()
 
     data class SettingData(
+        var enableJDCache: Boolean = true,
+        var preloadHtml: Boolean = true,
+        var useCustomMatcher: Boolean = false,
         var urlIndex: Int = 0,
         var url: String = MyApplication.app.getString(R.string.settings_url0)
-    )
+    ) {
+        init {
+            JDCache.enable(enableJDCache)
+        }
+    }
 }
