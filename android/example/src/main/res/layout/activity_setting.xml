@@ -28,6 +28,28 @@
         android:layout_margin="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_enable_jdcache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Enable JDCache"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_preload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:checked="true"
+            android:text="Pre-load HTML"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_custom_matcher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Use customized matcher"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

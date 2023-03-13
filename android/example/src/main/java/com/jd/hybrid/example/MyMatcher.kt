@@ -24,55 +24,19 @@
  */
 package com.jd.hybrid.example
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.webkit.WebView
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import com.jd.jdcache.match.base.JDCacheResourceMatcher
+import com.jd.jdcache.util.JDCacheLog
 
-class SysWebFragment : BaseFragment() {
+class MyMatcher : JDCacheResourceMatcher() {
+    override val name: String = "MyMatcher"
 
-    private lateinit var webView: WebView
-
-    init {
-        perfData = Utils.PerformanceData("SysWebFragment")
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_sys_webview, container, false)
-        this.webView = view.findViewById(R.id.webview)
-        val url = arguments?.getString("url")
-        Utils.configWebView(webView, perfData)
-        url?.apply {
-            webView.loadUrl(url)
+    override fun match(request: WebResourceRequest): WebResourceResponse? {
+        if (request.isForMainFrame) {
+            JDCacheLog.d("MyMatcher test matching")
+            showToast("Custom Matcher matching")
         }
-        return view
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        webView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        webView.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        webView.destroy()
+        return null
     }
 }

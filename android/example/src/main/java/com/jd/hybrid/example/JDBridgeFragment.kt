@@ -68,7 +68,6 @@ class JDBridgeFragment : BaseFragment() {
         val url = arguments?.getString("url")
         Utils.configWebView(webView, perfData)
         //给WebViewClient绑定loader并设置给WebView
-        webView.webViewClient = Utils.getCommonWebClient(webView)
         webView.webChromeClient = object : WebChromeClient() {
             override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
                 consoleMessage?.apply {

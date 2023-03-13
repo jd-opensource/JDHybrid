@@ -24,29 +24,73 @@
  */
 package com.jd.hybrid.example
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
+import android.webkit.WebViewClient
+import com.jd.jdcache.JDCacheLoader
+import com.jd.jdcache.JDCache.createDefaultLoader
+import com.jd.jdcache.JDCache.getAndBindLoader
 
-class SysWebFragment : BaseFragment() {
 
-    private lateinit var webView: WebView
-
+class JDCacheFragment : BaseFragment() {
     init {
-        perfData = Utils.PerformanceData("SysWebFragment")
+        perfData = Utils.PerformanceData("JDCacheFragment")
     }
+
+    private lateinit var webView: MyWebView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_sys_webview, container, false)
-        this.webView = view.findViewById(R.id.webview)
+        val view = inflater.inflate(R.layout.fragment_jdcache, container, false)
+        view?.apply {
+            webView = findViewById(R.id.webview)
+        }
+
         val url = arguments?.getString("url")
+        //获取之前提前创建的loader
+        val loaderKey = arguments?.getString("loaderKey")
+        var loader: JDCacheLoader? = loaderKey?.let {
+            getAndBindLoader(it)
+        }
+        //如果之前没有提前创建，则这里创建
+        loader = loader ?: createDefaultLoader(url)
+        //设置lifecycleOwner监听生命周期
+        loader?.lifecycleOwner = this
+
         Utils.configWebView(webView, perfData)
+        //给WebViewClient绑定loader并设置给WebView
+        webView.webViewClient = object : WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                url?.let {
+                    loader?.onPageStarted(url)
+                }
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                url?.let {
+                    loader?.onPageFinished(url)
+                }
+            }
+
+            override fun shouldInterceptRequest(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): WebResourceResponse? {
+                return request?.let { loader?.onRequest(request) } ?: super.shouldInterceptRequest(view, request)
+            }
+        }
+
         url?.apply {
             webView.loadUrl(url)
         }
@@ -55,6 +99,7 @@ class SysWebFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+        webView.onStart()
     }
 
     override fun onResume() {
@@ -69,6 +114,7 @@ class SysWebFragment : BaseFragment() {
 
     override fun onStop() {
         super.onStop()
+        webView.onStop()
     }
 
     override fun onDestroy() {

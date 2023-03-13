@@ -33,7 +33,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$ktCoroutineVer"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$ktCoroutineVer"
     implementation 'androidx.annotation:annotation:1.1.0'
+
     api project(':JDBridge')
+    api project(':JDCache')
 
 }
 

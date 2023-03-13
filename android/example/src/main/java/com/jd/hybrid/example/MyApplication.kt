@@ -29,6 +29,7 @@ import android.widget.Toast
 import com.jd.hybrid.JDWebView
 import com.jd.hybrid.example.CoroutineHelper.launchCoroutine
 import com.jd.jdbridge.JDBridgeManager
+import com.jd.jdcache.JDCache
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -56,6 +57,10 @@ class MyApplication : Application() {
         super.onCreate()
 
         JDWebView.webDebug = debug // will also set JDBridge.js debuggable
+        //初始化JDCache
+        JDCache.init(this, debug)
+        //设置必要参数
+        JDCache.setGlobalParams(MyHybridParamsProvider::class.java)
         //注册全局JS桥
         JDBridgeManager.registerPlugin(GlobalJdBridgePlugin.NAME, GlobalJdBridgePlugin::class.java)
     }
