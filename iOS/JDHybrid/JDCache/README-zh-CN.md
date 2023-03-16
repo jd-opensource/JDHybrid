@@ -1,9 +1,4 @@
 # JDCache
-
-[![Version](https://img.shields.io/cocoapods/v/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/JDCache)
-[![License](https://img.shields.io/cocoapods/l/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/JDCache)
-[![Platform](https://img.shields.io/cocoapods/p/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/JDCache)
-
 JDCache iOS端是基于[WKURLSchemeHandler](https://developer.apple.com/documentation/webkit/wkurlschemehandler)协议设计，通过拦截http/https的请求，来匹配本地离线资源，加快H5页面加载速度。有如下特点：
 + 代码无侵入
 + H5业务接入无改造成本

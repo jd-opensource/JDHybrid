@@ -1,148 +1,85 @@
-# XCache
+# JDCache
 
-[![Version](https://img.shields.io/cocoapods/v/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/XCache)
-[![License](https://img.shields.io/cocoapods/l/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/XCache)
-[![Platform](https://img.shields.io/cocoapods/p/XBridge.svg?style=flat)](https://cocoapods.org/pods/JDHybrid/XCache)
+The JDCache iOS side is designed based on the [WKURLSchemeHandler](https://developer.apple.com/documentation/webkit/wkurlschemehandler) protocol,By intercepting http/https requests, it matches local offline resources and speeds up the loading of H5 pages.Has the following characteristics:
++ code without intrusion
++ No transformation cost for H5 service access
++ Flexible, customizable matchmaking strategies
 
+## Dependencies
 
-## Installation
-
-XCache is available through [CocoaPods](https://cocoapods.org). To install
+JDCache is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'JDHybrid/XCache'
+pod 'JDHybrid/JDCache'
 ```
 First, You can generate offline package:
 
 [Offline Package Produce](../../../nodejs/README.md)
 
-## XCache API
+## Basic usage
 
-
-#### 1、Hybrid Enable
+#### 1、JDCache install
+Initialize JDCache when the APP launch, set the network cache delegate, and whether to enable the log.
+* netCache is used to cache network resources, complying with the [standard http cacheing protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching). The instance needs to extend the JDURLCacheDelegate protocol, and YYCache is recommended.
 
 ```objc
-WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
-configuration.xh_config.isEnabled = YES;
+[JDCache shareInstance].netCache = self.xhCache;
+[JDCache shareInstance].LogEnabled = YES;
 ```
 
 #### 2、Hybrid Enable With Configuration
-1). set Hybrid delegate<br>
-
-    a. import header file
-```objective-c
-#if __has_include(<JDHybrid/JDHybrid-umbrella.h>)
-#import <JDHybrid/JDHybrid-umbrella.h>
-#else
-#import "JDHybrid.h"
-#endif
-```
-    b. set delegate
-```objc
-[JDHybrid hybrid].delegate = self;
-```
-
-    c. implements delegate method
-    
-```objc
-- (id<XHDataSource>)sourceWithUrl:(NSString *)url{
-    XHLocalFileModel *model = [XHLocalFileModel new];
-    model.path = "xxx";
-    return model;   
-}   
-```
-    If you custom your offline package, please implements method sourceMap in XHDataSource, and returned data format should like:
-
-```json
-{
-    "host1":{"path1":"relative path1"},
-    "host2":{"path1":"relative path2"}
-}
-```
-    
-
-2). Set the entry URL when initializing WebView. The entry URL will decide whether to use hybrid to load according to the returned path from delegate method implemented above
+Hybrid can be enabled with just one line of code:
 
 ```objc
-WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
-configuration.xh_config.url = "https://www.jd.com";
+configuration.loader.enable = YES;
 ```
 
-#### 3、Add Custom SchemeHandlers
+* Note: This code must be set before using configuration to create a WKWebView instance to take effect.
 
-By adding a custom interception policy, you can modify all network resources requested during the loading process of WebView, and interrupt and modify them.
-
-
-1). Add Scheme 
-```objc
-WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
-[configuration.xh_config addCustomHandlerScheme:@"hybrid"];
-```
-   **Note: It is illegal when you want to set some resources's scheme with custom scheme in http(s) pages.**
-
-2). Add interception policy
-
-   a. Add interception policy to a single webView
-```objc
-WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
-[configuration.xh_config registerUrlSchemeHandlers:@[[XHURLSchemeHandler class]]];
-```
-   b. The delegate method of hybrid returns the policy that can intercept all WebView requests
-      
-```objc
-- (NSArray <Class>*)customURLSchemeHandlerClasses
-```
-3). Create a subclass that inherits XHURLSchemeHandler to implement the interception strategy. The subclass needs to implement the following methods
+#### 3、Create matchers
+1. Creating a matcher must implement the JDResourceMatcherImplProtocol protocol
 
 ```objc
+@protocol JDResourceMatcherImplProtocol <NSObject>
+// Description: According to the incoming NSURLRequest instance, the api needs to return whether to intercept or not.
 - (BOOL)canHandleWithRequest:(NSURLRequest *)request;
-- (void)startURLSchemeTask:(id <XHURLSchemeTask>)urlSchemeTask;
-- (void)stopURLSchemeTask:(id <XHURLSchemeTask>)urlSchemeTask;
+
+// Description: This API calls back data such as response, data, fail or success according to the incoming NSURLRequest instance.
+// * If the API `canHandleWithRequest:` returns YES, this API needs to call back data normally;
+// * If API `canHandleWithRequest:` returns NO, this API will not be called.
+- (void)startWithRequest:(NSURLRequest *)request
+        responseCallback:(JDNetResponseCallback)responseCallback
+            dataCallback:(JDNetDataCallback)dataCallback
+            failCallback:(JDNetFailCallback)failCallback
+        successCallback:(JDNetSuccessCallback)successCallback
+        redirectCallback:(JDNetRedirectCallback)redirectCallback;
+@end
 ```
 
-#### 4、 HTML Preload
+2. set loader's matchers, such as：
 
-It is used to preload HTML resources before WebView loading, and directly load cached data while H5 loading to improve loading performance.
-
-1). Create HTML preload class
 ```objc
-XHPreload *preload = [XHPreload preloadURL:@"https://www.jd.com"];
+configuration.loader.matchers = @[mapResourceMatcher,aaaResourceMatcher,bbbResourceMatcher];
 ```
-2). Set preload ability when initializing WebView
+* All matchers are assigned to the matchers field of the JDCacheLoader instance in the form of an array. When JDCache intercepts a request, it will be passed to the matchers in the array in order for processing.
+
+## More usage
+
+#### HTML preload
+Perform preloading by following these steps:
+1. create a JDCachePreload instance
 
 ```objc
-WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
-configuration.xh_config.preload = preload;
+JDCachePreload *preload = [JDCachePreload new];
+preload.request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.jd.com"]];
+preload.enable = YES;
+[preload startPreload];
 ```
-The preloaded data cannot be used multiple times and will release after being used
 
-#### 5、 Other API
-1). Add custom request header
+2. Assign the JDCachePreload instance to the preload field of the loader
 
-Implements method
 ```objc
-- (NSDictionary *)customHeaders{
-    return @{
-        @"native":@1,
-    };
-}
+configuration.loader.preload = preload;
 ```
-
-2). Modify preloading url
-
-Implements method
-```objc
-
-- (void)preloadHtmlLoaderWithURL:(NSString *)url complete:(void (^) (NSString *url))complete{
-   complete(url);
-}
-
-```
-
-3). Add network cache
-
-Implements method
-```objc
-- (id <XHCacheDelegate>)networkCache;
-```
+then, the preloaded data will be used first after JDCache intercepts the HTML request.
