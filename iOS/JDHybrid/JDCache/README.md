@@ -58,7 +58,7 @@ configuration.loader.enable = YES;
 @end
 ```
 
-2. set loader's matchers, such as：
+2. set JDCacheLoader's matchers, such as：
 
 ```objc
 configuration.loader.matchers = @[mapResourceMatcher,aaaResourceMatcher,bbbResourceMatcher];
@@ -84,3 +84,13 @@ preload.enable = YES;
 configuration.loader.preload = preload;
 ```
 then, the preloaded data will be used first after JDCache intercepts the HTML request.
+
+#### loading downgrade
+
+Downgrade by:
+
+```objc
+configuration.loader.degrade = YES;
+```
+
+Then, in this WebView loading, all requests are initiated by the network library and do not match offline resources.
