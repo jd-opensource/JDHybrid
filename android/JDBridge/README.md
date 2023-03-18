@@ -1,18 +1,16 @@
-> [简体中文文档](README-zh-CN.md)
+
 
 # JDBridge Android
 
-## Introduction
+## 简介
 
-General Native and JS communication library. Please refer to the logic execution flow chart [here](../../doc/progress.md)
+通用的原生与JS通信方法库。内部逻辑执行流程图请查阅[此处](../../doc/progress.md)
 
-You can add bridge ability by `JDBridge` (JDBridgeManager) or `JDWebView`
-
-## Dependency
+## 依赖
 
 Gradle
 
-In your root `build.gradle`
+项目 `build.gradle`
 
 ```groovy
 	allprojects {
@@ -23,32 +21,32 @@ In your root `build.gradle`
 	}
 ```
 
-In your module `build.gradle`
+模块 `build.gradle`
 
 ```groovy
 	implementation 'com.github.JDFED.JDHybrid:JDBridge:1.0.0'
 ```
 
-## Native usage
+## 原生Native使用
 
-It is recommended that you directly use [JDWebView](../JDWebView/README.md) as your WebView. It is the default implementation of `IBridgeWebView` and implements some additional functions. You can use JDBridge functions directly without additional configuration.
+建议您直接使用[JDWebView](../JDWebView/README.md)作为您的WebView，它是`IBridgeWebView`的默认实现，并额外实现了一些功能，您无需额外配置即可直接使用JDBridge功能。
 
-Or you can implement the `IBridgeWebView` interface by yourself, please refer to [Implementation of IBridgeWebView](#Implementation of IBridgeWebView)
+或者您也可自行实现`IBridgeWebView`接口，请参考[自定义实现IBridgeWebView](#自定义实现IBridgeWebView)
 
-**After an instance of IBridgeWebView is created, JS can be called without waiting for the Web to be loaded. The JS call triggered in advance will be automatically distributed internally when the JS is ready.**
+**IBridgeWebView的实例创建后即可调用JS，无需等待Web加载完毕，内部会自动在JS准备好时，分发提前触发的JS调用。**
 
-### Native call JS
+### 原生调用JS
 
-##### Call JS Plugin
+##### 调用JS模块
 
 ```kotlin
-//  JsPluginName, String
-//  params, any type that can be Jsonfied
+//  JsPluginName为JS模块名，供原生调用，String
+//  params为参数，可为任意能被JSON化的类型
 webView.callJS("JsPluginName", params, object : IBridgeCallback {
 	override fun onSuccess(result: Any?) {
 	}
 })
-// or use callback with error
+// 或者带error回调
 webView.callJS("JsPluginName", params, object : IBridgeCallback {
 	override fun onSuccess(result: Any?) {
 	}
@@ -57,11 +55,12 @@ webView.callJS("JsPluginName", params, object : IBridgeCallback {
 })
 ```
 
-##### Call JS Plugin(multiple callbacks)
+##### 调用JS模块（JS持续回调）
 
-It can be used to trigger JS download or other long-term scenarios that will continue to callback multiple times. You need to use `IBridgeProgressCallback` as the callback.
+可用于触发JS下载等长时间的，会持续回调多次的场景。您需要使用`IBridgeProgressCallback`作为回调方法。
 
 ```kotlin
+//  JsPluginName为JS模块名，供原生调用
 webView.callJS("JsPluginName", params, object : IBridgeProgressCallback {
   override fun onError(errMsg: String?) {
   	//invoked on error
@@ -77,9 +76,9 @@ webView.callJS("JsPluginName", params, object : IBridgeProgressCallback {
 })
 ```
 
-##### Call JS Default Plugin
+##### 调用JS默认处理模块
 
-If JS registered a default plugin, then JS plugin name can be omitted when native calls JS.
+若JS注册了默认处理，原生调用时可不指定JS模块名
 
 ```kotlin
 webView.callJS(null, params, object : IBridgeCallback {
@@ -91,12 +90,12 @@ webView.callJS(null, params, object : IBridgeCallback {
 
 
 
-### Native Plugin (JS Call Native)
+### 原生注册模块给JS调用
 
-##### Native Plugin(Callback Only once)
+##### 单次回调
 
 ```kotlin
-// NativePluginName, String
+// NativePluginName为原生模块名，提供给JS调用
 webView.registerPlugin("NativePluginName", object : IBridgePlugin {
   override fun execute(
     webView: IBridgeWebView?,
@@ -110,16 +109,15 @@ webView.registerPlugin("NativePluginName", object : IBridgePlugin {
     } else {
       callback?.onError(errMsg) // return result to js
     }
-    //return true means this call is actully handled,
-    //false means method's value cannot be found in your plugin
-    return true
+    return true //返回true说明方法被调用
   }
 })
 ```
 
-##### Native Plugin (Multiple Callback)
+##### 持续多次回调
 
 ```kotlin
+// NativePluginName为原生模块名，提供给JS调用
 webView.registerPlugin("NativePluginName", object : IBridgePlugin {
   var progress = 0
   override fun execute(
@@ -132,42 +130,42 @@ webView.registerPlugin("NativePluginName", object : IBridgePlugin {
     if (progress == 100 || callback !is IBridgeProgressCallback) {
     	callback?.onSuccess(result) // return result to js
     } else {
-    	callback?.onProgress(tempResult)  // return result to js multiple times
+    	callback?.onProgress(tempResult)  // return multiple results to js
     }
-    return true
+    return true //返回true说明方法被调用
   }
 })
 ```
 
-##### Unregister Native Plugin
+##### 移除已添加的原生功能
 
 ```kotlin
 webView.unregisterPlugin("NativePluginName")
 ```
 
-##### Native Default Plugin
+##### 默认原生处理
 
-If Native registered a default plugin, then plugin name can be omitted when JS calls Native.
-
-```kotlin
-webView.registerDefaultPlugin(IBridgePluginInstance)//IBridgePluginInstance is an instance of IBridgePlugin
-```
-
-##### Global Native Plugin
-
-If Native registered a global plugin, then all `IBridgeWebView` can use it.
+原生注册默认处理模块，JS调用时可不指定特定模块名称
 
 ```kotlin
-JDBridgeManager.registerPlugin(GlobalJDBridgePlugin.NAME, GlobalJDBridgePlugin::class.java)//use class of your implementation of IBridgeWebView
+webView.registerDefaultPlugin(IBridgePluginInstance)//IBridgePluginInstance是IBridgePlugin的实例
 ```
 
-> The difference between this method and methods described earlier is that the `IBridgePlugin` registered by the previous methods usually is bound to the single WebView instance, while the `JDBridgeManager.registerPlugin` method registers the `IBridgePlugin` class, which is automatically created when used, and is for all WebView instances.
+##### 注册全局模块
+
+原生注册全局处理模块后，所有`IBridgeWebView`实例都能使用
+
+```kotlin
+JDBridgeManager.registerPlugin(GlobalJDBridgePlugin.NAME, GlobalJDBridgePlugin::class.java)//使用的是class来注册
+```
+
+> 此方法与之前描述的方法不同的是，之前的方法注册的`IBridgePlugin`模块为实例级别，通常可以和WebView实例互相绑定，而`JDBridgeManager.registerPlugin`方法注册的是`IBridgePlugin`的类，在WebView使用时才自动创建，内部逻辑与WebView实例不强引用
 
 
 
-### Native fire custome  JS event
+### 原生通知自定义事件
 
-> eventName is a customed string, i.e. 'customEvent'.
+> eventName 自定义名称，例如 customEvent
 
 ```kotlin
 webView.dispatchEvent(eventName, params)
@@ -175,73 +173,73 @@ webView.dispatchEvent(eventName, params)
 
 
 
-### Implementation of IBridgeWebView
+### 自定义实现IBridgeWebView
 
-Please refer to the following example to implement `IBridgeWebView`, it is similar to `JDWebView`. It requires you to create an `JDBridgeInstaller` and use it to bridge some variables and methods.
+类似`JDWebView`, 实现`IBridgeWebView`请参照以下例子。需要您创建`JDBridgeInstaller`并使用其桥接部分成员变量和方法。
 
 ```kotlin
 class MyWebView : WebView, IBridgeWebView {
 
     constructor(context: Context) : super(context)
 
-    //Create JDBridgeInstaller
+    //创建JDBridgeInstaller
     private val jdBridgeInstaller: JDBridgeInstaller = JDBridgeInstaller()
 
     final override val view: View
         get() = this
 
-    //use JDBridgeInstaller's bridgeMap
+    //使用JDBridgeInstaller的bridgeMap
     final override val bridgeMap: MutableMap<String, IProxy>
-        get() = jdBridgeInstaller.bridgeMap
+        get() = jdbridgeInstaller.bridgeMap
 
     init {
         @Suppress("LeakingThis")
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.install(this)
     }
 
     override fun onStart() {
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.onStart()
     }
 
     override fun onResume() {
         super.onResume()
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.onResume()
     }
 
     override fun onPause() {
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.onPause()
         super.onPause()
     }
 
     override fun onStop() {
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.onStop()
     }
 
     override fun destroy() {
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.destroy()
         super.destroy()
     }
 
     override fun loadUrl(url: String) {
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.loadUrl(url)
         super.loadUrl(url)
     }
 
     override fun loadUrl(url: String, additionalHttpHeaders: MutableMap<String, String>) {
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.loadUrl(url, additionalHttpHeaders)
         super.loadUrl(url, additionalHttpHeaders)
     }
 
     override fun reload() {
-        //call JDBridgeInstaller
+        //调用JDBridgeInstaller的桥接方法
         jdBridgeInstaller.reload()
         super.reload()
     }

@@ -1,62 +1,57 @@
-| [简体中文文档](./README-zh-CN.md)
-
 # JDBridge iOS
 
 
-## Cocoapods
 
-add
+## 通过cocoapods集成JDBridge，在podfile文件中添加：
 
 ```ruby
 pod 'JDHybrid/JDBridge'
 ```
-in your podfile
+## JDBridge 简介
 
-## JDBridge Introduction
-
-General Native and JS communication library. Please refer to the logic execution flow chart [here](../../../doc/progress.md)
-
-You can add bridge ability by `JDBridge` (JDBridgeManager) or `JDWebView`
+通用的原生与JS通信方法库。逻辑执行流程图请查阅[此处](../../../doc/progress.md)
 
 ## Native call JS
 
-**JDBridge can call JS after creating an instance, without waiting for the web to load. The call will be triggered automatically when JS is ready.**
+ iOS既可以利用JDBridgeManager来添加Bridge能力，也可使用`JDWebView`作为WebView容器来使用Bridge能力。
 
-### JDBridgeManager Initialize
+**JDWebView创建实例后即可调用JS，无需等待Web加载完毕，内部会自动在JS准备好时分发之前触发的调用。**
+
+### JDBridgeManager初始化
 
 ```objective-c
-//  return JDBridgeManager instance，You should retain it
-//  WebView，Your WebView
+//  返回JDBridgeManager实例，需业务retain
+//  WebView，添加jsbridge能力的webview实例
 + (nullable JDBridgeManager *)bridgeForWebView:(WKWebView *)webView;
 ```
-
-### Add MessageHandler
+### 添加messageHandler
 
 ```objective-c
-// add MessageHandler，default: XWebView、JDBridge
+// 添加MessageHandler，默认添加了XWebView、JDBridge
 - (void)addScriptMessageHandlers:(NSArray *)messageHanders
 
 ```
 
-### Native Call JS API
+### 一、 Native Call JS API
 
-#### Call JS Module（Callback Only Once）
+#### 调用JS模块（单次回调）
 
 ```objective-c
-//  JsPluginName，String
-//  Params，Any type that can be JSON
+//  JsPluginName为JS模块名，供原生调用，String
+//  params为参数，可为任意能被JSON化的类型
 - (void)callJSWithPluginName:(NSString *)pluginName
                       params:(id)message
                     callback:(void(^)(id _Nullable obj, NSError * _Nullable error))callback;
 ```
 
-#### Call JS Module（Callback Continuouslly)
+#### 调用JS模块（持续回调）
+
+可用于触发JS下载等长时间的，会持续回调多次的场景。
 
 ```objective-c
-// JsPluginName，String
-//  params，Any type that can be JSON
-//progress, block
-// callback, block
+// JsPluginName为JS模块名，供原生调用，String
+//  params为参数，可为任意能被JSON化的类型
+// callback 会调用多次，需jsplugin与native协商好进度描述机制
 
 - (void)callJSWithPluginName:(nullable NSString *)pluginName
                       params:(nullable id)message
@@ -64,7 +59,9 @@ You can add bridge ability by `JDBridge` (JDBridgeManager) or `JDWebView`
                     callback:(void(^)(id _Nullable obj, NSError * _Nullable error))callback;
 ```
 
-#### Call JS Default Plugin
+#### 调用JS默认处理模块
+
+若JS注册了默认处理，原生调用时可不指定JS模块名
 
 ```objective-c
 - (void)callDefaultJSBridgeWithParams:(id)message
@@ -74,25 +71,24 @@ You can add bridge ability by `JDBridge` (JDBridgeManager) or `JDWebView`
 
 
 
-### Native Plugin (JS Call Native)
+### 二、 JS Call Native
 
-CustomPlugin：inherits JDBridgeBasePlugin，and implements method
+实现自定义组件：继承JDBridgeBasePlugin，实现方法
 
 ```objective-c
 - (void)excute:(NSString *)action params:(NSDictionary *)params callback:(JDBridgeCallBack *)jsBridgeCallback
 ```
+来接收h5的参数，并通过
+* jsBridgeCallback.onSuccess
+* jsBridgeCallback.onSuccessProgress、
+* jsBridgeCallback.onError
 
-* jsBridgeCallback.onSuccess //for success
-* jsBridgeCallback.onSuccessProgress // for progress
-* jsBridgeCallback.onError //for error
+其中之一进行回调
 
-callback with one of these blocks
-
-#### Native Plugin(Callback Only once)
-
-e.g: 
+#### 单次回调
 
 ```objective-c
+// NativePluginName为原生模块名（如：MyNativePlugin），提供给JS调用
 @interface MyNativePlugin: JDBridgeBasePlugin
 
 @end
@@ -113,9 +109,10 @@ e.g:
 
 ```
 
-#### Native Plugin (Callback Continuouslly)
+#### 持续多次回调
 
 ```objective-c
+// NativePluginName为原生模块名，提供给JS调用
 @interface MySequenceNativePlugin : JDBridgeBasePlugin
 
 @end
@@ -140,9 +137,9 @@ e.g:
 @end
 ```
 
-#### Native Default Plugin
+#### 默认原生处理
 
-Native registers A default plugin which js can call without plugin name
+原生注册默认处理模块，JS调用时可不指定特定模块名称
 
 ```objective-c
 - (void)registerDefaultPlugin:(JDBridgeBasePlugin *)defaultJsPlugin
