@@ -4,27 +4,27 @@ JDHybrid是一个移动端高性能Hybrid容器框架，致力于提升h5加载�
 
 * jsbridge --- JDBridge
 * 集成各种开源能力的WebView容器 --- JDWebView
-* 离线包加载框架 --- JDCache (即将开源)
+* 离线包加载框架 --- JDCache 
 
 
 <h2>快速入门指南</h2>
 <h3>使用JSBridge</h3>
 JSBridge(JDBridge) 包含jssdk部分与客户端部分，使用时js先引入JSSDK(见下文), 并添加js插件供native调用，或通过jssdk api调用native插件，使用方式参考：
 
-* [H5 JSBridge](H5/JDBridge/README-zh-CN.md)
-* [iOS JSBridge](iOS/JDHybrid/JDBridge/README-zh-CN.md)
-* [Android JSBridge](android/JDBridge/README-zh-CN.md)
+* [H5 JSBridge](H5/JDBridge/README.md)
+* [iOS JSBridge](iOS/JDHybrid/JDBridge/README.md)
+* [Android JSBridge](android/JDBridge/README.md)
 
 <h3>使用WebView容器</h3>
 JDHybrid 提供了支持JDBridge的容器，未来还会支持离线加载能力，可直接使用
 
-* [iOS WebView容器](iOS/JDHybrid/JDWebView/README-zh-CN.md)
-* [Android WebView容器](android/JDWebView/README-zh-CN.md)
+* [iOS WebView容器](iOS/JDHybrid/JDWebView/README.md)
+* [Android WebView容器](android/JDWebView/README.md)
 
 <h3>使用JDCache</h3>
 
-* [iOS JDCache](iOS/JDHybrid/JDCache/README-zh-CN.md)
-* Android 待更新
+* [iOS JDCache](iOS/JDHybrid/JDCache/README.md)
+* [Android JDCache](android/JDCache/README.md)
 
 <h3>更多使用方式</h3>
 
@@ -33,9 +33,7 @@ JDHybrid 提供了支持JDBridge的容器，未来还会支持离线加载能力
 * [Android Demo ](android/example)进入[android](/android)文件夹，执行`./gradlew installDebug`
 
 <h2>Contributing</h2>
-我们希望你能为JDHybrid做出贡献，帮助它变得比现在更好！我们鼓励并重视所有类型的贡献，请参阅我们的贡献指南了解更多信息。
-
-如果你有任何问题，请随时在我们的讨论区开启一个新的讨论主题。
+我们欢迎您能为JDHybrid做出贡献帮助它变得更好！我们鼓励并重视所有类型的贡献。如果你有任何问题，请随时在我们的讨论区开启一个新的讨论主题。
 
 <h2>License</h2>
 JDHybrid(包括子项目) 基于MIT协议开源，具体查看 LICENSE 文件了解更多信息.
