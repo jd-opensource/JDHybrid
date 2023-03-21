@@ -25,6 +25,7 @@ JDHybrid 提供了支持JDBridge的容器，未来还会支持离线加载能力
 
 * [iOS JDCache](iOS/JDHybrid/JDCache/README.md)
 * [Android JDCache](android/JDCache/README.md)
+* [离线包制作](nodejs/README.md)
 
 <h3>更多使用方式</h3>
 
