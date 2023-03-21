@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置离线资源</title>
+    <script src="./iconfont/iconfont.js"></script>
+    <script src="./utils.js"></script>
+    <script>
+        window.url_resource;
+        window.url_selcted_resource = [];
+        function fontName(type) {
+            var map = {
+                'html': 'icon-bird-html',
+                'stylesheet': 'icon-bird-css',
+                'image': 'icon-bird-image',
+                'script': 'icon-bird-js',
+                'audio': 'icon-bird-audio'
+            }
+            var name = map[type];
+            return name ? name : 'icon-bird-unknow'
+        }
+        function getResource() {
+            var xhr = new XMLHttpRequest
+            var querys = ['cookie', 'url', 'user-agent'].map((v, i) => {
+                var query = ''
+                var text = document.getElementById(v).value
+                if (typeof (text) === 'string' && text.length > 0) {
+                    query = v + '=' + encodeURIComponent(text)
+                }
+                return query
+            })
+            if (querys[1].length == 0) {
+                document.getElementById('error').innerText = "输入的url为空";
+                return
+            } else {
+                document.getElementById('error').innerText = ''
+            }
+            xhr.open('get', urlhost(window.location.href) + 'parseurl?' + querys.join('&'));
+            var resourceButton = document.getElementById('getResource')
+            resourceButton.disabled = true
+            resourceButton.innerHTML = "解析中..."
+            xhr.addEventListener('load', e => {
+                resourceButton.disabled = false
+                resourceButton.innerHTML = "开始解析"
+                var resource = JSON.parse(e.target.responseText)
+                var htmlText = ''
+                window.url_resource = resource['resource']
+                resource['resource'].forEach((v, i) => {
+                        htmlText += '<div><input class="url' + i + '"  onclick="oncheckBox(this)" type="checkbox" value="' + i + '"><span class="item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#' + fontName(v.resourceType) + '"></use></svg></span><span class="item-url">' + v.url + '</span></input><span class="item-tools"><p class="eye" onclick="eyeClick(' + i + ')">预览</p><p>' + (v.size / 1024.0).toFixed(0) + 'KB</p></span></div>'
+                })
+                document.getElementById('source').innerHTML = htmlText;
+                if (htmlText.length > 0) {
+                    document.getElementById('zip').style.display = ''
+                }
+                document.getElementById('shotPhoto').src = resource['screenshotDesc']['filePath']
+                document.getElementById('shotPhoto').style.display = ''
+            })
+            xhr.addEventListener('error', e => {
+                resourceButton.disabled = false
+                resourceButton.innerHTML = "开始解析"
+                document.getElementById('shotPhoto').style.display = 'none'
+            })
+            xhr.send(null)
+            document.getElementById('shotPhoto').style.display = 'none'
+            document.getElementById('success').style.display = 'none'
+            document.getElementById('source').innerHTML = ''
+            document.getElementById('zip').style.display = 'none'
+            document.getElementById('resource').value = ''
+            window.url_selcted_resource = []
+            window.url_resource = []
+            window.url_selcted_resource = []
+            document.getElementById('size').innerHTML = 0.00
+            document.getElementById('count').innerHTML = 0;
+            document.getElementById('selectedAll').checked = false
+        }
+        function oncheckBox(e) {
+            var source = window.url_resource[e.value];
+            if (e.checked) {
+                window.url_selcted_resource.push(source)
+            } else {
+                var index = window.url_selcted_resource.indexOf(source)
+                if (index != -1) {
+                    window.url_selcted_resource.splice(index, 1)
+                }
+            }
+            var size = 0
+            window.url_selcted_resource.forEach((v, i) => {
+                size += v.size;
+            })
+            document.getElementById('selectedAll').checked = window.url_selcted_resource.length == window.url_resource.length
+            document.getElementById('size').innerHTML = (size / 1024.0).toFixed(2)
+            document.getElementById('count').innerHTML = window.url_selcted_resource.length;
+        }
+        function selectedAll(e) {
+            if (e.checked) {
+                var size = 0
+                window.url_selcted_resource = window.url_resource
+                window.url_resource.forEach((v, i) => {
+                    size += v.size;
+                    document.getElementsByClassName('url' + i)[0].checked = true
+                })
+                document.getElementById('size').innerHTML = (size / 1024.0).toFixed(2)
+                document.getElementById('count').innerHTML = window.url_selcted_resource.length;
+            } else {
+                window.url_selcted_resource.forEach((v, i) => {
+                    var index = window.url_resource.indexOf(v)
+                    if (index != -1) {
+                        document.getElementsByClassName('url' + index)[0].checked = false
+                    }
+                })
+                window.url_selcted_resource = []
+                document.getElementById('size').innerHTML = 0.00
+                document.getElementById('count').innerHTML = 0;
+            }
+        }
+        function toZip() {
+            var resourceButton = document.getElementById('toZip')
+            resourceButton.disabled = true
+            resourceButton.innerHTML = "配置保存中..."
+            document.getElementById('success').style.display = 'none'
+            var xhr = new XMLHttpRequest
+            xhr.open('post', urlhost(window.location.href) + 'toZip?zip=1');
+            xhr.addEventListener('load', e => {
+                resourceButton.disabled = false
+                resourceButton.innerHTML = "保存配置"
+                var text = e.target.responseText;
+                document.getElementById('success').style.display = ''
+                document.getElementById('succesAdress').innerText = text;
+            })
+            xhr.addEventListener('error', e => {
+                resourceButton.disabled = false
+                resourceButton.innerHTML = "保存配置"
+                var text = e.target.responseText;
+                document.getElementById('success').style.display = ''
+                document.getElementById('succesAdress').innerText = text;
+            })
+            var text = document.getElementById('resource').value;
+            var newArray;
+            if (text.length > 0) {
+                newArray = text.split(',').map((v, i) => {
+                    return {
+                        'url': v
+                    }
+                })
+            }
+            if (!newArray || newArray.length == 0) {
+                newArray = window.url_selcted_resource;
+            } else {
+                newArray = newArray.concat(window.url_selcted_resource)
+            }
+            xhr.send(JSON.stringify(newArray))
+        }
+
+        function eyeClick(i) {
+            window.open(window.url_resource[i].url);
+        }
+    </script>
+</head>
+
+<style>
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+.url-parse-warp {
+  text-align: center;
+  background: #666;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.url-input {
+  width: 380px;
+}
+.url-parse-warp input {
+  padding: 0 15px;
+  line-height: 32px;
+  border-radius: 6px;
+  border: none;
+  margin: 20px;
+}
+.resource-warp {
+  display: flex;
+}
+.snapshoot {
+  overflow: hidden;
+  width: 350px;
+  height: 550px;
+  background: #464646;
+  border-radius: 5px;
+  border: 1px solid #d7d7d7;
+  box-shadow: 2px 2px 3px #dbdbdb;
+}
+.snapshoot img {
+  width: 100%;
+}
+.resources {
+  padding: 0 5px;
+  width: 585px;
+  height: 550px;
+  padding-left: 5px;
+  border: 1px solid #e4e4e4;
+  margin-left: 16px;
+  border-radius: 5px;
+  background: #f9f9f9;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  color: #333;
+}
+.resources>div {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  position: relative;
+  margin-top: 10px;
+  background: #e3e3e3;
+  border-radius: 5px;
+  padding: 4px;
+}
+.error {
+  color: #cd1e22;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  padding-left: 15px;
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.item-icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+}
+.item-url {
+  word-break: break-all;
+  margin-right: 100px;
+}
+.item-tools {
+  display: flex;
+  position: absolute;
+  right: 0;
+  width: 100px;
+  align-items: center;
+  justify-content: space-around;
+}
+.item-tools>p {
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 800;
+  font-family: arial;
+  color: #ff9800;
+}
+.eye{
+  color: #106a98 !important;
+}
+.submit-pannel {
+  text-align: right;
+  background: #f9f9f9;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 1px 1px 4px #e3e3e3;
+}
+.submit-pannel textarea {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 10px;
+  resize: none;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+}
+button {
+  border: none;
+  color: #fff;
+  background: #eb961b;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 0 10px;
+}
+.submit-info {
+  font-size: 13px;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 235px;
+  display: inline-flex;
+}
+.response-warp {
+  margin-top: 10px;
+  background: #20a2b1;
+  color: #fff;
+  text-align: left;
+  border-radius: 5px;
+  padding: 10px;
+  word-break: break-all;
+}
+</style>
+<body>
+  <div class="container">
+    <div class="url-parse-warp">
+      <div> <input class="url-input" id="url" placeholder="请输入url" type="url" /> </div>
+      <div>
+          <input id="cookie" placeholder="请输入cookie" type="text" />
+      </div>
+      <div> <input id="user-agent" placeholder="请输入user-agent" type="text" /> </div>
+      <button id="getResource" onclick="getResource()">开始解析</button>
+    </div>
+
+    <div id="error" class="error">
+    </div>
+
+    <div class="resource-warp">
+      <div class="snapshoot">
+        <img id="shotPhoto"/>
+      </div>
+      <div class="resources" id="source">
+      </div>
+    </div>
+
+    <div id="zip" class="submit-pannel">
+      <div class="submit-info">
+        <span style="display: inherit;">
+          <input id="selectedAll" onclick="selectedAll(this)" type="checkbox" value="">全选 </input>
+        </span>
+        <span><label>已选中<label id="count">0</label>项</span>
+        <span>大小: <label id="size">0</label> KB </label></span>
+      </div>
+        <div> <textarea id="resource" placeholder="通过url批量添加资源，以逗号分隔" type="text"></textarea> </div>
+        <button id="toZip" onclick="toZip()" style="margin-bottom: 10px;">保存资源</button>
+        <div id="success" class="response-warp" style="display: none;">
+            离线包地址:<p id="succesAdress"></p>
+        </div>
+    </div>
+  </div>
+</body>
+
+</html>
