@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3323425 */
+  src: url('iconfont.woff2?t=1651058947637') format('woff2'),
+       url('iconfont.woff?t=1651058947637') format('woff'),
+       url('iconfont.ttf?t=1651058947637') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bird-error:before {
+  content: "\e685";
+}
+
+.icon-bird-andriod:before {
+  content: "\e616";
+}
+
+.icon-bird-ios:before {
+  content: "\e64b";
+}
+
+.icon-bird-zip:before {
+  content: "\e859";
+}
+
+.icon-bird-success:before {
+  content: "\e72d";
+}
+
+.icon-bird-warning:before {
+  content: "\e73d";
+}
+
+.icon-bird-log:before {
+  content: "\eac2";
+}
+
+.icon-bird-eye:before {
+  content: "\e601";
+}
+
+.icon-bird-json:before {
+  content: "\e6b3";
+}
+
+.icon-bird-delete:before {
+  content: "\e689";
+}
+
+.icon-bird-unknown:before {
+  content: "\e617";
+}
+
+.icon-bird-audio:before {
+  content: "\e618";
+}
+
+.icon-bird-css:before {
+  content: "\e619";
+}
+
+.icon-bird-html:before {
+  content: "\e61a";
+}
+
+.icon-bird-js:before {
+  content: "\e61b";
+}
+
+.icon-bird-image:before {
+  content: "\e61c";
+}
+

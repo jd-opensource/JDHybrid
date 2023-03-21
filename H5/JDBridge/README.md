@@ -1,32 +1,29 @@
-> [简体中文文档](./README-zh-CN.md)
+# JDBridge JS指南
 
-# JDBridge JS
-
-## 引入
+## Dependencies
 
 ```javascript
 //npm install jdhybrid_jdbridge
 var JDBridge = require("jdhybrid_jdbridge")
 ```
 
-Use APIs in the `JDBridge` object to communicate with native
+使用`JDBridge`的API来与原生Native通信。
 
-## Call Native Plugin
+## JS Call Native
 
-#### JS Call Native Plugin1 (callback only once)
+#### 调用原生模块(单次回调)
 
 ```javascript
-// call function
+// 回调function
 var callback = function (result) {
 	showLog('Received result from MyNativePlugin, result = ' + result)
 }
-// NativePluginName 
-// action type:string
-// params type:string,json
+// NativePluginName为原生模块名，提供给JS调用
+// action为string类型，params可为string或json
 JDBridge.callNative('NativePlugin', {action: 'MyAction', params: params, success: callback})
 ```
 
-#### JS Call Native Plugin2（Callback Continuouslly）
+#### 调用原生模块（多次回调）
 
 ```javascript
 var successCallback = function (result) {
@@ -35,13 +32,14 @@ var successCallback = function (result) {
 var progressCallback = function (result, response) {
 	showLog('Received progress from MySequenceNativePlugin, complete = ' + response.complete + ', msg = ' + response.msg + ', result = ' + result)
 }
-
+// NativePlugin为原生模块名，提供给JS调用
+// 除了上面所示方法传参外，模块名也可使用以下方法传参
 JDBridge.callNative({name: 'NativePlugin', params: params, success: successCallback, progress: progressCallback})
 ```
 
-#### JS Call Default Plugin
+#### 调用原生默认处理模块
 
-JS will call a default plugin if no plugin name specify clearly
+若原生注册了默认模块，JS调用时可不指定特定模块名
 
 ```javascript
 var callback = function (result, response) {
@@ -52,25 +50,25 @@ JDBridge.callNative({params: params, success: callback})
 
 
 
-## Register JSPlugin
+## JSPlugin（供原生调用）
 
-#### Callback Only Once
+#### 单次回调
 
 ```javascript
-//JsPluginName
-//Sync return
+//JsPluginName为JS模块名，供原生调用
+//同步
 JDBridge.registerPlugin('JsPluginName', function (params) {
   showLog('MySyncJsPlugin invoked by native, params = ' + JSON.stringify(params))
   return JSON.stringify(result)
 })
 
-//Async return
+//异步
 JDBridge.registerPlugin('JsPluginName', function (params, callback) {
   showLog('MyAsyncJsPlugin invoked by native, params = ' + JSON.stringify(params))
   callback(JSON.stringify(result))
 })
 
-//may fail
+//处理失败
 JDBridge.registerPlugin('JsPluginName', function (params, callback) {
   showLog('MyAsyncJsPlugin invoked by native, params = ' + JSON.stringify(params))
   var isSuccess = true;//false
@@ -78,11 +76,11 @@ JDBridge.registerPlugin('JsPluginName', function (params, callback) {
 })
 ```
 
-#### Callback Continuouslly
+#### 多次回调
 
 ```javascript
-//JsPluginName
-//callback，complete indicates finished or not
+//JsPluginName为JS模块名，供原生调用
+//通过callback返回中间、最后结果给原生，使用complete标志是否完成
 JDBridge.registerPlugin('JsPluginName', function (params, callback) {
   showLog('MySequenceJsPlugin invoked by native, params = ' + JSON.stringify(params))
   var isSuccess = true;//false
@@ -99,17 +97,15 @@ JDBridge.registerPlugin('JsPluginName', function (params, callback) {
 })
 ```
 
-#### Remove JSPlugin
+#### 移除JSPlugin
 
 ```javascript
 JDBridge.unregisterPlugin('JsPluginName')
 ```
 
+#### 默认JSPlugin
 
-
-#### Default JSPlugin
-
-JS can register a default plugin that native can call without plugin name
+JS可注册默认处理，原生调用时可不指定JS模块名
 
 ```javascript
 JDBridge.registerDefaultPlugin(function (params, callback) {
@@ -118,11 +114,9 @@ JDBridge.registerDefaultPlugin(function (params, callback) {
 })
 ```
 
+## JS等待初始化
 
-
-## JS Initial
-
-Please use all js functions after JDBridge is initialized. You can use following code to get called after initialized.
+请等JDBridge初始化好后使用JS功能。可使用以下代码等待初始化。
 
 ```javascript
 function connectJDBridge(callback) {
@@ -146,22 +140,23 @@ connectJDBridge(function (bridge) {
 })
 ```
 
-## Debug Mode
+## Debug模式
 
-By default, `JDBridge` will not show logs. You can enable debug mode to show them.
+默认情况下`JDBridge` 不会输出debug log，您可以用以下方法展示log。
 
 ```javascript
 JDBridge.setDebug(true);
 ```
 
-## WebView Event
+## WebView原生事件通知
 
-We defined webview event mechanism with a friendly way ----- window.addEventListener
+我们基于H5最熟悉的window.addEventListener实现了一套事件通知机制
 
-#### JDWebView Default Event
+#### JDWebView 默认支持事件
 
-* webView visible
+原生需使用`JDWebView`时才可使用
 
+* webView 可见性
 ```javascript
     window.addEventListener('ContainerShow', function(event){
         alert(event);
@@ -171,8 +166,7 @@ We defined webview event mechanism with a friendly way ----- window.addEventList
     }, false);
 ```
 
-* App enter foreground/background(only iOS)
-
+* App 进入前后台(only iOS)
 ```javascript
     window.addEventListener('AppShow', function(event){
         alert(event);
@@ -182,7 +176,7 @@ We defined webview event mechanism with a friendly way ----- window.addEventList
     }, false);
 ```
 
-#### Listen Custom Event
+#### 监听自定义事件
 
 ```javascript
 window.addEventListener('customEvent', function(event){

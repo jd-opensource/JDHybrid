@@ -1,18 +1,16 @@
-> [简体中文文档](README-zh-CN.md)
-
 # XCache - Android
 
-## UML
+## 类结构图
 
 ![XCacheUML](../doc/jdcache_process.md)
 
-## Dependencies
+## 依赖
 
-Add XCache as a dependency in your module's build.gradle
+在您模块的`build.gradle`文件配置中加入以下依赖
 
 Gradle
 
-In your root `build.gradle`
+项目 build.gradle`
 
 ```groovy
 	allprojects {
@@ -23,15 +21,17 @@ In your root `build.gradle`
 	}
 ```
 
-In your module `build.gradle`
+模块 `build.gradle`
 
 ```groovy
 	implementation 'com.github.JDHybrid.JDHybridTmp:XCache:1.0.0'
 ```
 
-## Usage
+## 使用
 
-### Implement parameters provider
+### 提供必要参数
+
+实现`XCParamsProvider`中的方法
 
 ```kotlin
 class MyHybridGlobalParams : XCParamsProvider() {
@@ -60,9 +60,9 @@ class MyHybridGlobalParams : XCParamsProvider() {
 }
 ```
 
-#### If you are using XWebView
+#### 若您使用的是XWebView
 
-If you are using `XWebView`, you can implement `XParamsProvider` instead of `XCParamsProvider`, this save you from bothering some methods. For example:
+若您使用的是`XWebView`，您可以不使用`XCParamsProvider`，而是使用`XParamsProvider`，这样可以省去编写部分模板代码。
 
 ```kotlin
 class MyHybridParamsProvider : XParamsProvider() {
@@ -81,33 +81,33 @@ class MyHybridParamsProvider : XParamsProvider() {
 }
 ```
 
-### Initialize when App startup
+### 初始化
 
-In your application
+在您App的application中
 
 ```kotlin
-//initialize XCache
+//初始化XCache
 XCache.init(this, debug)
-//set the XCParamsProvider you implemented before
+//用您上面实现的XCParamsProvider类来设置
 XCache.setGlobalParams(MyHybridParamsProvider::class)
 ```
 
-### Preload Web's resources before opening webview page
+### 打开网页前预加载网页
 
 ```kotlin
 val url = "https://m.jd.com"
-//get loader in advance
+//提前获取XCLoader
 val loader = XCache.createDefaultLoader(url)
 val intent = Intent(this, WebActivity::class.java)
 loader?.key?.let {
-	//pass the loader key to WebActivity
+	//把loader key通过bundle传给WebActivity(展示网页的Activity)
   intent.putExtra("loaderKey", it)
 }
 intent.putExtra("url", url)
 startActivity(intent)
 ```
 
-### Use loader you created before in your webview page
+### 在页面中使用XCLoader桥接网页资源
 
 ```kotlin
 class WebActivity : AppCompatActivity() {
@@ -117,14 +117,14 @@ class WebActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val url = intent.getStringExtra("url")
-        //get the loader's key and get XCLoader instance
+        //获得loader key，然后获取XCLoader实例
         val loaderKey = intent.getStringExtra("loaderKey")
         var loader = loaderKey?.let {
             getLoader(it)
         }
-        //But if you haven't create loader in advance, don't worry, you can create from here.
+        //如果没有提前创建XCLoader实例，也可现场创建，但我们强烈建议您提前创建好实例，否则预加载的效果将大打折扣
         loader = loader ?: createDefaultLoader(url)
-        //set the loader's lifecycleOwner to this page
+        //设置loader的lifecycleOwner为当前页面
         loader?.lifecycleOwner = this
 
         setContentView(R.layout.activity_web)
@@ -132,28 +132,26 @@ class WebActivity : AppCompatActivity() {
         configWebView()
         val webView = this.webView
         webView?.let {
-          	//set XWebClient as WebViewClient, and pass the view and XCLoader to it
+          	//使用XWebClient作为WebViewClient，在创建XWebClient时传入view和XCLoader
             webView.webViewClient = XWebClient(webView, loader)
         }
         url?.apply {
-          	//now you can start load web page
+          	//然后您可以加载网页了
             webView?.loadUrl(url)
         }
     }
 }
 ```
 
-**And all done!** Now your app will preload the html resource when you create the `XCLoader`, and use the downloaded html file as response.
-
-If you would like to use other local files (such as image, css, js etc.), please read the following instruction.
+**这样就完成了!** 现在您的App将可以在创建`XCLoader`实例时预加载HTML文件。如果您想使用本地的离线资源（例如图片、css、js等资源），请继续阅读后续文档。
 
 ---
 
-## Optional Functions
+## 更多功能
 
-### Use other local files
+### 使用本地离线资源
 
-If you use default resource matcher `MapResourceMatcher` that the sdk provides, you can override `XCParamsProvider`'s method *sourceWithUrl* to return `XCDataSource` for specific url. 
+当您使用SDK提供的默认资源匹配器`MapResourceMatcher`时，您可以通过`XCParamsProvider`的*sourceWithUrl*方法为特定的URL提供本地离线资源。
 
 ```kotlin
 class MyHybridGlobalParams : XCParamsProvider() {
@@ -163,12 +161,12 @@ class MyHybridGlobalParams : XCParamsProvider() {
 }
 ```
 
-`XCDataSource` helps default matcher `MapResourceMatcher` with locating offline files, so a *Map<String, XCLocalResp>* is needed to map each resource's url to its relative path of offline file. 
+返回的`XCDataSource`可让 `MapResourceMatcher`使用里面的离线文件，为此您需要提供各资源URL和其本地文件路径映射信息的一个*Map<String, XCLocalResp>*。
 
-There are 4 ways set the map: 
+有4种方法可以为`XCDataSource`设置文件映射：
 
-- One is put a json file named `"resource.json"` in `XCDataSource`'s offlineDirPath and `XCDataSource` will find the json itself during constructing. There is a tool generating offline package containing `resource.json`, please see [Offline package generating Tool](../../nodejs/README.md).
-- The other three ways are setting *sourceMap*, *sourceList*, or *sourceStr* for `XCDataSource`.
+- 第一种方法是，映射信息存入在离线文件目录中的`"resource.json"`文件里，离线文件目录由`XCDataSource`构造时，传入的`offlineDirPath`来设置。然后 `XCDataSource`在构造时会自动查找这个json文件。我们提供了一个自动为URL打包离线资源的工具，可以下载选定的离线资源文件和生成`resource.json`文件，请查阅[Offline package generating Tool](../../nodejs/README.md)。
+- 其他的方法是让`XCDataSource`使用*sourceMap*、 *sourceList*、或者*sourceStr*方法。
 
 ```kotlin
     fun getDataSource(url: String): XCDataSource? {
@@ -186,26 +184,26 @@ There are 4 ways set the map:
     }
 ```
 
-### More options about XCLoader
+### XCLoader的更多功能
 
-Throught `XCLoader`, you can change settings or functions about loading offline files.
+通过`XCLoader`您可以更改加载离线文件的设置或者方案，可自行创建XCLoader实例。
 
 ```kotlin
-val loader = XCLoader(url) // create XCLoader
-XCache.addLoader(loader) // add it into XCache so that other page can retreive it by XCache.getLoader(key)
+val loader = XCLoader(url) //创建XCLoader
+XCache.addLoader(loader) //把实例添加进XCache中，这样您可以在其他页面通过key来拿到此实例。例如XCache.getLoader(key)
 ```
 
-#### Enable/Disable preload Html
+#### 开启/关闭预加载HTML文件功能
 
-By default, the html preloading is enable, you can change it when creating your own `XCLoader`
+默认情况下，预加载HTML文件功能是自动开启的，您也可以在创建Loader时更改此配置。
 
 ```kotlin
 XCLoader(url, preload = false)
 ```
 
-#### Custom offline resource matching rules for the WebView
+#### 自定义离线资源匹配规则
 
-You can add your own matcher into the matcher list, matcher will try to match resources throught the matcher list by order, and return response once a matcher matches, ignore remaining matchers.
+您可以创建自己的匹配器来自定义匹配规则，您需要实现一个新的`XCResourceMatcher`。在获取默认匹配器列表后，再修改匹配器列表，可添加自定义的匹配器。网页资源的匹配是按此列表中匹配器顺序执行的，一旦前一个匹配器匹配成功，此资源将不再执行后续的匹配器。
 
 ```kotlin
     private fun createMyMatcherList(): List<XCResourceMatcher> {
@@ -225,26 +223,26 @@ You can add your own matcher into the matcher list, matcher will try to match re
     }
 ```
 
-#### Custom global offline resource matching rules
+#### 自定义全局离线资源匹配规则
 
-You can add your matcher to default matcher list, then every default `XCLoader` will use your matcher by default. You need to implement `XCResourceMatcher`. Your matcher will be added in the last of matcher list.
+您可以把自定义的匹配器添加到默认匹配器列表中，这样后续的XCLoader在创建默认匹配规则时都会使用到您的匹配器。您的匹配器将会添加到列表的最后。
 
 ```kotlin
 XCache.registerDefaultResourceMatcher(YourCustomMatcherClass::class)
 ```
 
-### Enable XCache globally or just for single webview
+### 开关XCache功能
 
 ```kotlin
-XCache.enable(true/false) // globally
-XCLoader.enable = true/false // for single webview's loader
+XCache.enable(true/false) // 全局开启/关闭
+XCLoader.enable = true/false // 给XCLoader所使用webview开启/关闭
 ```
 
-### Use your own database/net/... implementations
+### 使用自定义的功能实现（网络、文件操作等）
 
 ```kotlin
-XCache.registerService(YourFileServiceClass::class) //YourFileServiceClass extends XCFileRepoDelegate
-XCache.registerService(YourNetServiceClass::class) //YourNetServiceClass extends XCNetDelegate
+XCache.registerService(YourFileServiceClass::class) //YourFileServiceClass继承自XCFileRepoDelegate
+XCache.registerService(YourNetServiceClass::class) //YourNetServiceClass继承自XCNetDelegate
 //etc.
 ```
 

@@ -1,12 +1,10 @@
-> [简体中文文档](README-zh-CN.md)
-
 # JDWebView - Android
 
-## Dependencies
+## 依赖
 
 Gradle
 
-In your root `build.gradle`
+项目 `build.gradle`
 
 ```groovy
 	allprojects {
@@ -17,17 +15,17 @@ In your root `build.gradle`
 	}
 ```
 
-In your module `build.gradle`
+模块 `build.gradle`
 
 ```groovy
 	implementation 'com.github.JDFED.JDHybrid:JDWebView:1.0.0'
 ```
 
-## Usage
+## 使用
 
 ### WebView
 
-Use `JDWebView` as your WebView widget.
+使用 `JDWebView` 作为您的Web View。
 
 > ```kotlin
 > import com.jd.hybrid.JDWebView
@@ -39,15 +37,15 @@ Use `JDWebView` as your WebView widget.
 > ...
 > ```
 
-## Abilities
+## 能力
 
 ### JDBridge
 
-Integrated [JDBridge](../JDBridge/README.md)
+已集成 [JDBridge](../JDBridge/README.md)
 
-### Lifecycle events
+### 生命周期事件
 
-`JDWebView` will fire following JS events when its lifecycle changed.
+`JDWebView` 的生命周期变化时会发射以下JS事件：
 
 - onStart -> event: ContainerShow
 
@@ -57,9 +55,9 @@ Integrated [JDBridge](../JDBridge/README.md)
 
 - onStop -> event: ContainerHide
 
-### Following methods will run on main thread
+### 以下方法会在主线程执行
 
-If you call the following methods of WebView not in the main thread, `JDWebView` will auto switch to main thread to invoke them, and you don't need to handle the switching.
+`JDWebView`的以下方法将会自动切换到主线程执行，您无需手动切换：
 
 - addJavascriptInterface
 - evaluateJavascript

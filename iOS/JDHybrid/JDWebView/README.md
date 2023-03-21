@@ -1,17 +1,15 @@
-> [简体中文文档](README-zh-CN.md)
-
 # JDWebView
 
-## Cocoapods Install JDWebView
+## cocoapods 使用JDWebView
 ```ruby
 pod 'JDHybrid/JDWebView'
 ```
 
-## JDWebView Introduction
+## JDWebView简介
 
-JDWebView provides a WebView container which inherits UIView and adds WKWebView as a child view. The container provides support for the following capabilities:
+JDWebView提供了容器WebView继承了UIView，并添加了WKWebView作为子View，容器提供了以下几种能力的支持
 
-### KVO Observer
+### KVO监听
 
 ```objective-c
 /// KVO, loading progress
@@ -24,24 +22,24 @@ JDWebView provides a WebView container which inherits UIView and adds WKWebView 
 @property(nonatomic, strong, readonly)NSURL                       *URL;
 ```
 
-### JSBridge Support（Base On JDBridge）
+### JSBridge的支持（基于JDBridge）
 ```objective-c
 @property(nonatomic, strong, readonly)JDBridgeManager              *jsBridgeManager;
 
 ```
 
-### WKWebViewConfigure 
+### WKWebViewConfigure的默认设置与音视频播放行为控制
 ```objective-c
 /// default
 + (WKWebViewConfiguration *)defaultConfiguration;
 
-/// modify wkconfiguration
+/// repair wkconfiguration
 /// @param configuration the configuration you want to repair
 /// @param required weather need useraction
 - (void)configuration:(WKWebViewConfiguration *)configuration requiringUserActionForPlayback:(BOOL)required;
 ```
 
-### WKWebView UIDelegate Default Implementation
+### WKWebView UIDelegate的默认实现
 
 ```objective-c
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler;
@@ -51,7 +49,7 @@ JDWebView provides a WebView container which inherits UIView and adds WKWebView 
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable result))completionHandler;
 ```
 
-### Add UserSciprt
+### 添加UserSciprt
 ```objective-c
 - (void)addUserScript:(NSString *)javaScript
         injectionTime:(WKUserScriptInjectionTime)injectTime
@@ -59,7 +57,7 @@ JDWebView provides a WebView container which inherits UIView and adds WKWebView 
 ```
 
 
-### WebView JSBridge
+### WebView JSBridge能力
 ```objective-c
 
 - (void)registerMessageHandlers:(NSArray *)messageHandlers;
@@ -79,6 +77,7 @@ JDWebView provides a WebView container which inherits UIView and adds WKWebView 
                     callback:(void(^)(id _Nullable obj, NSError * _Nullable error))callback;
 ```
 
+
 ### WebView Event
 ```objective-c
 /// App or webview event to h5
@@ -97,7 +96,7 @@ JDWebView provides a WebView container which inherits UIView and adds WKWebView 
 - (void)viewWillDisAppear;
 ```
 
-### WebView delegate 
+### WebView delegate （基于WKNavigationDelegate与UIDelegate）
 
 ```objective-c
 - (void)webView:(JDWebViewContainer *)webView beforeDecidePolicyForNavigationAction:(WKNavigationAction *)navigationAction;

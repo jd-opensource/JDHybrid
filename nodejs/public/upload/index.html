@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>上传文件</title>
+    <script src="../utils.js"></script>
+    <script>
+        function upload(i) {
+            var file = document.getElementById("file").files[0]
+            var formData = new FormData()
+            formData.append('file1', "blob")
+            formData.append('file', file)
+            var xhr = new XMLHttpRequest()
+            var domOutput = document.getElementById('output')
+            xhr.upload.addEventListener('progress', function (e) {
+                domOutput.innerHTML += 'upload.progress（addEventListener）,' + 
+                e.loaded +
+                    '<br/>,'+
+                e.total +
+                    '<br/>'
+            })
+            xhr.upload.addEventListener('loadstart', function (e) {
+                domOutput.innerHTML += 'upload.loadstart（addEventListener）,' + 
+                e.loaded +
+                    '<br/>,'+
+                e.total +
+                    '<br/>'
+            })
+            xhr.upload.addEventListener('load', function (e) {
+                domOutput.innerHTML += 'upload.load（addEventListener）,' + 
+                e.loaded +
+                    '<br/>,'+
+                e.total +
+                    '<br/>'
+            })
+            xhr.upload.addEventListener('error', function (e) {
+                domOutput.innerHTML += 'upload.error（addEventListener）,' + 
+                e.loaded +
+                    '<br/>,'+
+                e.total +
+                    '<br/>'
+            })
+            xhr.upload.addEventListener('loadend', function (e) {
+                domOutput.innerHTML += 'upload.loadend（addEventListener）,' + 
+                e.loaded +
+                    '<br/>,'+
+                e.total +
+                    '<br/>'
+            })
+            xhr.addEventListener('readystatechange', function (e) {
+                domOutput.innerHTML +=
+                    'readystatechange（addEventListener）,' +
+                    xhr.readyState +
+                    ',' +
+                    xhr.status +
+                    ',' +
+                    xhr.statusText +
+                    ',' +
+                    xhr.responseText +
+                    '<br/>'
+            })
+            xhr.onreadystatechange = function (e) {
+                domOutput.innerHTML +=
+                    'readystatechange（on）,' +
+                    xhr.readyState +
+                    ',' +
+                    xhr.status +
+                    ',' +
+                    xhr.statusText +
+                    ',' +
+                    xhr.responseText +
+                    '<br/>'
+            }
+            xhr.addEventListener('load', function (e) {
+                domOutput.innerHTML += 'load（addEventListener）,' +
+                    xhr.readyState +
+                    ',' +
+                    xhr.status +
+                    ',' +
+                    xhr.statusText +
+                    ',' +
+                    xhr.responseText +
+                    '<br/>'
+            })
+            xhr.onload = function (e) {
+                domOutput.innerHTML += 'load（on）,' +
+                    xhr.readyState +
+                    ',' +
+                    xhr.status +
+                    ',' +
+                    xhr.statusText +
+                    ',' +
+                    xhr.responseText +
+                    '<br/>'
+            }
+            xhr.addEventListener('error', function (e) {
+                domOutput.innerHTML += 'error（addEventListener）,' +
+                    xhr.readyState +
+                    ',' +
+                    xhr.status +
+                    ',' +
+                    xhr.statusText +
+                    ',' +
+                    xhr.responseText +
+                    '<br/>'
+            })
+            xhr.addEventListener('progress', function (e) {
+                domOutput.innerHTML += 'progress（addEventListener）,' +
+                    xhr.readyState +
+                    ',' +
+                    xhr.status +
+                    ',' +
+                    xhr.statusText +
+                    ',' +
+                    xhr.responseText +
+                    '<br/>'+
+                e.loaded +
+                    '<br/>' +
+                e.total +
+                    '<br/>'
+            })
+
+            xhr.onerror = function (e) {
+                domOutput.innerHTML += 'error（on）,' +
+                    xhr.readyState +
+                    ',' +
+                    xhr.status +
+                    ',' +
+                    xhr.statusText +
+                    ',' +
+                    xhr.responseText +
+                    '<br/>'
+            }
+            xhr.open(
+                'post',
+                urlhost(window.location.href) + 'upload'
+            )
+            xhr.send(i==0?file:formData)
+        }
+        function clearText() {
+            document.getElementById("output").innerHTML = ""
+        }
+    </script>
+
+</head>
+
+<body>
+    <input id="file" type="file" name="file">
+    <button type="submit" onclick="upload(0)">blob上传</button>
+    <button type="submit" onclick="upload(1)">formdata上传</button>
+    <button type="submit" onclick="clearText()">清空</button>
+    <div id="output"></div>
+</body>
+
+</html>
