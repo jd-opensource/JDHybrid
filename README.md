@@ -4,7 +4,8 @@ JDHybrid是一个移动端高性能Hybrid容器框架，致力于提升h5加载�
 
 * jsbridge --- JDBridge
 * 集成各种开源能力的WebView容器 --- JDWebView
-* 离线包加载框架 --- JDCache 
+* 离线包加载框架 --- JDCache
+* iOS同层渲染 --- JDWidget（正在路上...）
 
 
 <h2>快速入门指南</h2>
@@ -35,7 +36,7 @@ JDHybrid 提供了支持JDBridge的容器，未来还会支持离线加载能力
 
 <h2>Contributing</h2>
 我们欢迎您能为JDHybrid做出贡献帮助它变得更好！我们鼓励并重视所有类型的贡献。如果你有任何问题，请随时在我们的讨论区开启一个新的讨论主题。
-
+如果您有webview方面的诉求，也可以提出需求。
 <h2>License</h2>
 JDHybrid(包括子项目) 基于MIT协议开源，具体查看 LICENSE 文件了解更多信息.
 
