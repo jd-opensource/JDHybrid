@@ -106,9 +106,11 @@ class JDBridge(val webView: IBridgeWebView) : IProxy {
     }
 
     fun destroy() {
-        for (it in nativeLocalPluginMap) {
-            if (it.value is Destroyable) {
-                (it.value as Destroyable).destroy()
+        synchronized(this) {
+            for (it in nativeLocalPluginMap) {
+                if (it.value is Destroyable) {
+                    (it.value as Destroyable).destroy()
+                }
             }
         }
 
