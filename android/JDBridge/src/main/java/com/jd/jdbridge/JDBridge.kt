@@ -127,11 +127,15 @@ class JDBridge(val webView: IBridgeWebView) : IProxy {
     }
 
     fun registerPlugin(pluginName: String, plugin: IBridgePlugin) {
-        nativeLocalPluginMap[pluginName] = plugin
+        synchronized(this) {
+            nativeLocalPluginMap[pluginName] = plugin
+        }
     }
 
     fun unregisterPlugin(pluginName: String) {
-        nativeLocalPluginMap.remove(pluginName)
+        synchronized(this) {
+            nativeLocalPluginMap.remove(pluginName)
+        }
     }
 
     fun registerDefaultPlugin(plugin: IBridgePlugin) {
@@ -254,11 +258,13 @@ class JDBridge(val webView: IBridgeWebView) : IProxy {
         var plugin: IBridgePlugin? = null
 
         if (!pluginName.isNullOrEmpty()) {
-            plugin = nativeLocalPluginMap[pluginName]
-            if (plugin == null) {
-                plugin = JDBridgeManager.getPluginClass(pluginName)?.newInstance()
-                if (plugin != null) {
-                    nativeLocalPluginMap[pluginName] = plugin
+            synchronized(this) {
+                plugin = nativeLocalPluginMap[pluginName]
+                if (plugin == null) {
+                    plugin = JDBridgeManager.getPluginClass(pluginName)?.newInstance()
+                    plugin?.let {
+                        nativeLocalPluginMap[pluginName] = it
+                    }
                 }
             }
         }
