@@ -274,18 +274,6 @@ _Pragma("clang diagnostic pop") \
     
     JDCacheLog(@"桥接formData，params: %@", params);
     
-    if (![url hasPrefix:@"https:"]&&![url hasPrefix:@"http:"]) {
-        if ([url hasPrefix:@"//"]) {
-            url = [@"https:" stringByAppendingString:url];
-        }else if ([url hasPrefix:@"/"]){
-            NSString *referer = self.webView.URL.absoluteString;;
-            NSString * prefixUrl = [referer componentsSeparatedByString:@"?"].firstObject;
-            if (JDValidStr(prefixUrl)) {
-                url = [prefixUrl stringByAppendingString:url];
-            }
-        }
-    }
-    
     NSString *body = params[@"body"];
     if (!JDValidStr(body)) return;
     
