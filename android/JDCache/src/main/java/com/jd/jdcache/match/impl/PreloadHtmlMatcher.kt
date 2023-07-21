@@ -14,6 +14,7 @@ import com.jd.jdcache.service.DelegateManager
 import com.jd.jdcache.service.base.*
 import com.jd.jdcache.util.*
 import com.jd.jdcache.util.CoroutineHelper.launchCoroutine
+import com.jd.jdcache.util.CoroutineHelper.runOnIo
 import com.jd.jdcache.util.JDCacheLog.d
 import com.jd.jdcache.util.JDCacheLog.e
 import com.jd.jdcache.util.UrlHelper.convertHeader
@@ -203,30 +204,54 @@ open class PreloadHtmlMatcher : JDCacheResourceMatcher() {
 
     protected open fun geDownloadLocalResp() : JDCacheLocalResp?{
         return waitingChannel?.let {
-            runBlocking {
-                try {
-                    log { d(name, "Waiting for receiving pre-download html file.") }
-                    //等待下载完成
-                    withTimeout(2000L) {
-                        waitingChannel?.receive()
+            if (!it.isClosedForReceive) {
+                runBlocking {
+                    try {
+                        log { d(name, "Waiting for receiving pre-download html file.") }
+                        //等待下载完成
+                        withTimeout(2000L) {
+                            it.receive()
+                        }
+                    } catch (e: TimeoutCancellationException) {
+                        log { d(name, "Timeout in receiving pre-download html file.") }
+                        null
+                    } catch (e: Exception) {
+                        log { e(name, "Error in receiving pre-download html file, e = $e") }
+                        null
                     }
-                } catch (e: TimeoutCancellationException) {
-                    log { d(name, "Timeout in receiving pre-download html file.") }
-                    null
-                } catch (e: Exception) {
-                    log { e(name, "Error in receiving pre-download html file, e = $e") }
-                    null
                 }
+            } else {
+                null
             }
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        waitingChannel?.cancel()
-        downloadTask?.cancel()
+        waitingChannel?.let {
+            it.cancel()
+            waitingChannel = null
+        }
+        downloadTask?.let {
+            it.cancel()
+            downloadTask = null
+        }
 
-        localResp?.fileStream?.close()
+        val fileStream = localResp?.fileStream
+        fileStream?.let {
+            if (it !is PreReadInputStream || !it.isClosed()) {
+                launchCoroutine {
+                    runOnIo {
+                        try {
+                            @Suppress("BlockingMethodInNonBlockingContext")
+                            it.close()
+                        } catch (e: Throwable) {
+                            log { e(name, e) }
+                        }
+                    }
+                }
+            }
+        }
         localResp?.filename?.let { fileRepo?.deleteFile(it) }
     }
 }

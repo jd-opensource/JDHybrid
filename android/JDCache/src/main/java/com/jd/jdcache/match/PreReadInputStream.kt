@@ -54,6 +54,10 @@ class PreReadInputStream(
         this.unreadStreamFinish = false
     }
 
+    fun isClosed(): Boolean {
+        return closed.get()
+    }
+
     /**
      * Call this when you would like to start pre-read the stream
      */
