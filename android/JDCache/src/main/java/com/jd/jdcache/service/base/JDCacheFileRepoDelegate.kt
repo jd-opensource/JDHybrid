@@ -118,7 +118,8 @@ open class FileRequestOption(
     var method: String = METHOD_GET,
     val header: MutableMap<String?, String>? = null,
     val userAgent: String? = null,
-    val cookie: String? = null
+    val cookie: String? = null,
+    val allowRedirect: Boolean = true
 )
 
 @Keep
@@ -127,11 +128,12 @@ open class FileSaveOption(
     header: MutableMap<String?, String>? = null,
     userAgent: String? = null,
     cookie: String? = null,
+    allowRedirect: Boolean = true,
     val needUnzip: Boolean = false,
     val unzipDir: String? = null,
     val split: Boolean = false,
     val mergeWithFile: String? = null
-) : FileRequestOption(method, header, userAgent, cookie)
+) : FileRequestOption(method, header, userAgent, cookie, allowRedirect)
 
 @Keep
 sealed class FileState {

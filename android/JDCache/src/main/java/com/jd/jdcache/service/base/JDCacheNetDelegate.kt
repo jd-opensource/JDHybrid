@@ -88,7 +88,8 @@ abstract class JDCacheNetDelegate : AbstractDelegate() {
         method: String = METHOD_GET,
         header: MutableMap<String?, String>? = null,
         userAgent: String? = null,
-        cookie: String? = null
+        cookie: String? = null,
+        followRedirect: Boolean = true
     ): Flow<NetState<File>>?
 
     /**
@@ -100,10 +101,11 @@ abstract class JDCacheNetDelegate : AbstractDelegate() {
         method: String = METHOD_GET,
         header: MutableMap<String?, String>? = null,
         userAgent: String? = null,
-        cookie: String? = null
+        cookie: String? = null,
+        followRedirect: Boolean = true
     ): NetState<File>? {
         return try {
-            downloadFlow(url, savePath, method, header, userAgent, cookie)?.toList()?.last()
+            downloadFlow(url, savePath, method, header, userAgent, cookie, followRedirect)?.toList()?.last()
         } catch (e: Exception) {
             log { e(name, e) }
             null

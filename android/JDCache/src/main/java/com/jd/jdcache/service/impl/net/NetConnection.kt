@@ -107,7 +107,8 @@ open class NetConnection : JDCacheNetDelegate() {
         method: String,
         header: MutableMap<String?, String>?,
         userAgent: String?,
-        cookie: String?
+        cookie: String?,
+        followRedirect: Boolean
     ): Flow<NetState<File>>? {
         if (url.isEmpty()) {
             log { e(name, "Cannot download file, because url is empty.") }
@@ -119,6 +120,10 @@ open class NetConnection : JDCacheNetDelegate() {
         }
         val request = FileRequest(url, savePath)
         request.method = method
+        request.header = header
+        request.userAgent = userAgent
+        request.cookies = cookie
+        request.allowRedirect = followRedirect
         return request.connectFlow()
     }
 

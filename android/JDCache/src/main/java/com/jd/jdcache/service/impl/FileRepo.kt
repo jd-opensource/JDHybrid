@@ -34,7 +34,8 @@ open class FileRepo : JDCacheFileRepoDelegate() {
             option?.method ?: METHOD_GET,
             option?.header,
             option?.userAgent,
-            option?.cookie
+            option?.cookie,
+            followRedirect = option?.allowRedirect?:true
         )?.map { netState ->
             when(netState) {
                 is NetState.Complete -> {
@@ -71,7 +72,8 @@ open class FileRepo : JDCacheFileRepoDelegate() {
             option?.method ?: METHOD_GET,
             option?.header,
             option?.userAgent,
-            option?.cookie
+            option?.cookie,
+            followRedirect = option?.allowRedirect?:true
         )?.map { netState ->
             when (netState) {
                 is NetState.OnStart -> {
