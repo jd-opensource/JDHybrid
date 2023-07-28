@@ -44,6 +44,16 @@ void JDCacheLog(NSString *format, ...) {
 
 @implementation JDUtils
 
+static NSDateFormatter *hybridDateFormatter = nil;
+
++ (NSDateFormatter *)shareHybridDateFormatter{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        hybridDateFormatter = [[NSDateFormatter alloc] init];
+    });
+    return hybridDateFormatter;
+}
+
 + (void)setLogEnable:(BOOL)enable {
     gJDCacheLogEnable = enable;
 }
@@ -246,17 +256,7 @@ void JDCacheLog(NSString *format, ...) {
         }else if([uppercaseKey isEqualToString:@"COMMENTURL"]){
             [cookieProperties setObject:value forKey:NSHTTPCookieCommentURL];
         }else if([uppercaseKey isEqualToString:@"EXPIRES"]){
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-            dateFormatter.dateFormat = @"EEE, dd-MMM-yyyy HH:mm:ss zzz";
-            NSDate *date = [dateFormatter dateFromString:value];
-            if (!date) {
-                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];//发现了这种赋值方法
-                date = [dateFormatter dateFromString:value];
-            }
-            if (!date) {
-                date = [NSDate dateWithTimeIntervalSinceNow:48*60*60];//用两天有效期兜底
-            }
+            NSDate *date = [self getExpiresDate:value];
             [cookieProperties setObject:date forKey:NSHTTPCookieExpires];
         }else if([uppercaseKey isEqualToString:@"DISCART"]){
             [cookieProperties setObject:value forKey:NSHTTPCookieDiscard];
@@ -276,6 +276,22 @@ void JDCacheLog(NSString *format, ...) {
         [cookieProperties setObject:url.host forKey:NSHTTPCookieDomain];
     }
     return [NSHTTPCookie cookieWithProperties:cookieProperties];
+}
+
++(NSDate*)getExpiresDate:(NSString *)value{
+    NSDate *date;
+    NSDateFormatter *dateFormatter = [self shareHybridDateFormatter];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    dateFormatter.dateFormat = @"EEE, dd-MMM-yyyy HH:mm:ss zzz";
+    date = [dateFormatter dateFromString:value];
+    if (!date) {
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+        date = [dateFormatter dateFromString:value];
+    }
+    if (!date) {
+        date = [NSDate dateWithTimeIntervalSinceNow:48*60*60];
+    }
+    return date;
 }
 
 @end
