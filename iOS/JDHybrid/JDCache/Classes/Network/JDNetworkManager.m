@@ -184,19 +184,7 @@ SOFTWARE.
 #pragma mark - <NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSHTTPURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler{
-    NSArray <NSHTTPCookie *>*responseCookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
-    if ([responseCookies isKindOfClass:[NSArray class]] && responseCookies.count > 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [responseCookies enumerateObjectsUsingBlock:^(NSHTTPCookie * _Nonnull cookie, NSUInteger idx, BOOL * _Nonnull stop) {
-                // 同步到WKWebView
-                if (@available(iOS 11.0, *)) {
-                    [[WKWebsiteDataStore defaultDataStore].httpCookieStore setCookie:cookie completionHandler:nil];
-                } else {
-                    // Fallback on earlier versions
-                }
-            }];
-        });
-    }
+    [self syncCookieToWKWithResponse:response];
     JDNetworkCallBackWorker *cbworker = [self.taskToCallBackWorkerMap objectForKey:@(dataTask.taskIdentifier)];
     if (cbworker) {
         cbworker.responseCallback(response);
@@ -225,6 +213,7 @@ SOFTWARE.
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest * _Nullable))completionHandler{
+    [self syncCookieToWKWithResponse:response];
     JDNetworkCallBackWorker *cbworker = [self.taskToCallBackWorkerMap objectForKey:@(task.taskIdentifier)];
     void(^redirectDecisionCallback)(BOOL) = ^(BOOL canPass) {
         if (canPass) {
@@ -242,6 +231,22 @@ SOFTWARE.
     JDNetworkCallBackWorker *cbworker = [self.taskToCallBackWorkerMap objectForKey:@(task.taskIdentifier)];
     if (cbworker.progressCallBack) {
         cbworker.progressCallBack(task.countOfBytesSent,task.countOfBytesExpectedToSend);
+    }
+}
+
+-(void)syncCookieToWKWithResponse:(NSHTTPURLResponse *)response {
+    NSArray <NSHTTPCookie *>*responseCookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
+    if ([responseCookies isKindOfClass:[NSArray class]] && responseCookies.count > 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [responseCookies enumerateObjectsUsingBlock:^(NSHTTPCookie * _Nonnull cookie, NSUInteger idx, BOOL * _Nonnull stop) {
+                // 同步到WKWebView
+                if (@available(iOS 11.0, *)) {
+                    [[WKWebsiteDataStore defaultDataStore].httpCookieStore setCookie:cookie completionHandler:nil];
+                } else {
+                    // Fallback on earlier versions
+                }
+            }];
+        });
     }
 }
 
