@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		212DD6DE2AAAD4730048ED4E /* XImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD6DC2AAAD4730048ED4E /* XImageElement.m */; };
+		21C6E2002AAAD9AE00EF98B5 /* JDXSLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C6E1FF2AAAD9AE00EF98B5 /* JDXSLViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -50,6 +52,10 @@
 
 /* Begin PBXFileReference section */
 		103D3013A3B9C1ADC42A63A5 /* Pods-JDHybrid_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDHybrid_Example.release.xcconfig"; path = "Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example.release.xcconfig"; sourceTree = "<group>"; };
+		212DD6DC2AAAD4730048ED4E /* XImageElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XImageElement.m; sourceTree = "<group>"; };
+		212DD6DD2AAAD4730048ED4E /* XImageElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XImageElement.h; sourceTree = "<group>"; };
+		21C6E1FE2AAAD9AE00EF98B5 /* JDXSLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDXSLViewController.h; sourceTree = "<group>"; };
+		21C6E1FF2AAAD9AE00EF98B5 /* JDXSLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDXSLViewController.m; sourceTree = "<group>"; };
 		2249E01521726C41DE2DF153 /* Pods_JDHybrid_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDHybrid_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		459419EAC0DC2DE1EBB5FBD0 /* Pods-JDHybrid_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDHybrid_Example.release.xcconfig"; path = "Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5E5ECDB347874DBFD7354666 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -128,6 +134,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		212DD6B42AAABA2C0048ED4E /* XSLDemo */ = {
+			isa = PBXGroup;
+			children = (
+				212DD6DD2AAAD4730048ED4E /* XImageElement.h */,
+				212DD6DC2AAAD4730048ED4E /* XImageElement.m */,
+			);
+			name = XSLDemo;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +188,7 @@
 				EF75D52829B9B39200E594D3 /* JDMapResourceMatcher.m */,
 				B05241FD2914E9A100F981F6 /* H5-Example */,
 				B006A2592893B8E7009DB690 /* JDBridgeDemo */,
+				212DD6B42AAABA2C0048ED4E /* XSLDemo */,
 				6003F59C195388D20070C39A /* XHAppDelegate.h */,
 				6003F59D195388D20070C39A /* XHAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -184,6 +200,8 @@
 				EF75D52229B9AE5F00E594D3 /* JDCacheViewController.m */,
 				EF75D52429B9AE7500E594D3 /* JDCacheWebViewController.h */,
 				EF75D52529B9AE7500E594D3 /* JDCacheWebViewController.m */,
+				21C6E1FE2AAAD9AE00EF98B5 /* JDXSLViewController.h */,
+				21C6E1FF2AAAD9AE00EF98B5 /* JDXSLViewController.m */,
 				FDE14D69284B9AF7003D85EE /* XHDefine.h */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -380,11 +398,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/JDHybrid/JDHybrid.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDHybrid.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,12 +442,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* XHAppDelegate.m in Sources */,
+				21C6E2002AAAD9AE00EF98B5 /* JDXSLViewController.m in Sources */,
 				EF75D58429B9C51500E594D3 /* XHCache.m in Sources */,
 				B006A2622893BEF0009DB690 /* MySequenceNativePlugin.m in Sources */,
 				EF75D52629B9AE7500E594D3 /* JDCacheWebViewController.m in Sources */,
 				EF75D52929B9B39200E594D3 /* JDMapResourceMatcher.m in Sources */,
 				B006A25C2893B91F009DB690 /* MyNativePlugin.m in Sources */,
 				EF75D52029B9AE3900E594D3 /* JDWebViewController.m in Sources */,
+				212DD6DE2AAAD4730048ED4E /* XImageElement.m in Sources */,
 				6003F5A7195388D20070C39A /* XHViewController.m in Sources */,
 				EF75D52329B9AE5F00E594D3 /* JDCacheViewController.m in Sources */,
 				B006A25F2893BAF0009DB690 /* MyDefaultPlugin.m in Sources */,
