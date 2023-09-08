@@ -8,14 +8,19 @@ PODS:
     - JDHybrid/JDBridge
   - JDHybrid/JDWebView (1.0.4):
     - JDHybrid/JDBridge
+  - SDWebImage (5.18.0):
+    - SDWebImage/Core (= 5.18.0)
+  - SDWebImage/Core (5.18.0)
   - YYCache (1.0.4)
 
 DEPENDENCIES:
   - JDHybrid (from `../../`)
+  - SDWebImage
   - YYCache
 
 SPEC REPOS:
   trunk:
+    - SDWebImage
     - YYCache
 
 EXTERNAL SOURCES:
@@ -24,8 +29,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   JDHybrid: fd4569dd931a92e26b49df51392dc1a2895bf05f
+  SDWebImage: 182830bcddc30cde95fbc60dfe4badc3553d94ba
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: b3f10b648df03d1f4e1fe5248206e9cff5ad2f05
+PODFILE CHECKSUM: 431c3e2d5d6a6b85a434a04451a6aa1c6c67f2b1
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.11.2
