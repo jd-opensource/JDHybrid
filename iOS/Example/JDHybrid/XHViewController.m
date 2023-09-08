@@ -25,7 +25,6 @@ SOFTWARE.
 #import "XHViewController.h"
 #import "JDWebViewController.h"
 #import "JDCacheViewController.h"
-#import "JDXSLViewController.h"
 
 @interface XHViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
@@ -51,7 +50,7 @@ SOFTWARE.
     
     __weak typeof(self)weakSelf = self;
     [self addGroupTitle:@"JDHybrid" subTitles:@[
-        @"JDWebView&JDBridge", @"JDCache",@"JDXSL"
+        @"JDWebView&JDBridge", @"JDCache"
     ] actionBlock:^(NSInteger index) {
         __strong typeof(weakSelf)self = weakSelf;
         if (!self) return;
@@ -65,12 +64,6 @@ SOFTWARE.
             case 1:
             {
                 JDCacheViewController *vc = [JDCacheViewController new];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 2:
-            {
-                JDXSLViewController *vc = [JDXSLViewController new];
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
