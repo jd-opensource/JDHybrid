@@ -98,7 +98,6 @@
         if ([element respondsToSelector:sel]){
             ((void (*)(id,SEL,id))objc_msgSend)(element,sel,params);
         }
-        element.propertValues[name] = params;
         if ([self validateString:params[@"callbackName"]]) {
             // 属性 函数事件
             SEL sel_callback = NSSelectorFromString([NSString stringWithFormat:@"xsl__%@:callback:",name]);

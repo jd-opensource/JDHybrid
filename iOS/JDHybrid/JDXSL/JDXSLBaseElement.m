@@ -16,7 +16,6 @@
 @property (nonatomic, copy) NSDictionary * style;
 @property (nonatomic, copy) NSDictionary * xslStyle;
 
-@property (nonatomic, assign) CGFloat opacity;
 @property (nonatomic, assign) BOOL  rendering;
 + (NSString *)jsClass;
 
@@ -28,8 +27,6 @@
 {
     self = [super init];
     if (self) {
-        self.elementCreateTime = [self getCurrentTime];
-        _opacity = 1;
     }
     return self;
 }
@@ -47,23 +44,12 @@
     return nil;
 }
 
-+ (NSDictionary *)element_api_map {
-    return @{
-        @"img": @"HTMLImageElement",
-        @"button": @"HTMLButtonElement",
-        @"input": @"HTMLInputElement",
-        @"div": @"HTMLDivElement",
-        @"map": @"HTMLMapElement",
-        @"video": @"HTMLVideoElement",
-    };
-}
-
 - (void)elementConnected {
     
 }
 
 - (void)elementRendered{
-    self.elementRenderStartTime = [self getCurrentTime];
+    
 }
 
 - (void)setSize:(CGSize)size{
@@ -73,17 +59,6 @@
         self.rendering = YES;
         [self elementRendered];
     }
-    if (size.height > 0 && [JDBridgePluginUtils validateString:self.border_radius]) {
-        [self setStyle:@"border_radius" value:self.border_radius target:self.containerView];
-    }
-}
-
-
-- (NSMutableDictionary *)propertValues{
-    if (!_propertValues) {
-        _propertValues = [NSMutableDictionary dictionary];
-    }
-    return _propertValues;
 }
 
 - (void)setStyleString:(NSString *)style{
@@ -102,13 +77,6 @@
         }
     }];
     
-    NSString * opacity = stylesMap[@"opacity"];
-    if (opacity) {
-        NSString *trimming = [opacity stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
-        if (trimming.length == 0 || [trimming isEqualToString:@"."]) {
-            _opacity = [opacity floatValue];
-        }
-    }
     _style = [NSDictionary dictionaryWithDictionary:stylesMap.copy];
 }
 
@@ -175,9 +143,6 @@ static void *JDXSLBaseElementJsKey = &JDXSLBaseElementJsKey;
         return copyJs;
     }
     NSMutableString *js = [NSMutableString stringWithFormat:@"%@", hybrid_hook_xsl_js()];
-    if ([[self elementName] isEqualToString:@"hybrid-image"]) {
-        js = [NSMutableString stringWithFormat:@"%@", hybrid_hook_xsl_image_js()];
-    }
     NSMutableString *elementClassName = [NSMutableString string];
     [[[self elementName] componentsSeparatedByString:@"-"] enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx == 0) {
@@ -269,79 +234,5 @@ static void *JDXSLBaseElementJsKey = &JDXSLBaseElementJsKey;
     return result;
 }
 
-- (NSString *)getCurrentTime{
-    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
-    NSString * currentTimeString = [NSString stringWithFormat:@"%.0f", currentTime*1000.0];
-    return currentTimeString;
-}
-
 @end
-
-
-
-@implementation JDXSLBaseElement (layer)
-/*
- 系统已经支持的 border 、background-color、opacity 、border-radius
- 
- 1、但是当是image的 时候： border-radius 会导致 图像不显示  background-color 会覆盖图像显示
- 2、border与border-radius 同时出现时，不显示图片，两者会产生冲突
- */
-- (void)setStyle:(id)key value:(id)obj target:(UIView *)target {
-    if ([key isEqualToString:@"border_radius"]) {
-        NSArray *objArr = [self objRegularSeparated:obj];
-        if (objArr.count == 1) {
-            CGFloat radius = [[objArr firstObject] floatValue];
-            [target xsl_drawCornerRadius:radius corners:UIRectCornerAllCorners];
-        } else if (objArr.count == 2) {
-            CGFloat radius = [[objArr firstObject] floatValue];
-            CGFloat radius2 = [[objArr lastObject] floatValue];
-            if (radius == radius2) {
-                [target xsl_drawCornerRadius:radius corners:UIRectCornerAllCorners];
-            } else {
-                [target xsl_drawCornerRadius:radius corners:(UIRectCornerTopLeft | UIRectCornerBottomRight)];
-                [target xsl_drawCornerRadius:radius2 corners:(UIRectCornerTopRight | UIRectCornerBottomLeft)];
-                [target xsl_setCornerWithTopLeftCorner:radius topRightCorner:radius2 bottomLeftCorner:radius2 bottomRightCorner:radius];
-            }
-        } else if (objArr.count == 3) {
-            CGFloat radius = [[objArr firstObject] floatValue];
-            CGFloat radius1 = [objArr[1] floatValue];
-            CGFloat radius2 = [[objArr lastObject] floatValue];
-            if (radius == radius1 && radius1 == radius2) {
-                [target xsl_drawCornerRadius:radius corners:UIRectCornerAllCorners];
-            } else {
-                [target xsl_setCornerWithTopLeftCorner:radius topRightCorner:radius1 bottomLeftCorner:radius1 bottomRightCorner:radius2];
-            }
-        }  else if (objArr.count == 4) {
-            CGFloat radius = [[objArr firstObject] floatValue];
-            CGFloat radius1 = [objArr[1] floatValue];
-            CGFloat radius2 = [objArr[2] floatValue];
-            CGFloat radius3 = [[objArr lastObject] floatValue];
-            if (radius == radius1 && radius1 == radius2 && radius2 == radius3) {
-                [target xsl_drawCornerRadius:radius corners:UIRectCornerAllCorners];
-            } else {
-                [target xsl_setCornerWithTopLeftCorner:radius topRightCorner:radius1 bottomLeftCorner:radius3 bottomRightCorner:radius2];
-            }
-        }
-    }
-}
-
-- (void)setStyle:(id)style target:(UIView *)target {
-    if ([style isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *in_style = [style copy];
-        [in_style enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            [self setStyle:key value:obj target:target];
-        }];
-    }
-}
-
-
-- (NSArray *)objRegularSeparated:(NSString *)obj {
-    NSString *noBetweenSpaceMode = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSArray *commponets = [noBetweenSpaceMode componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    commponets = [commponets filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self <> ''"]];
-    return commponets;
-}
-
-@end
-
 

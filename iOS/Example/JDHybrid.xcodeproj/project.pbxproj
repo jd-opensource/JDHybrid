@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		212DD6DE2AAAD4730048ED4E /* XImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD6DC2AAAD4730048ED4E /* XImageElement.m */; };
+		21730A1B2AE117ED00B2B70A /* xsl-index.html in Resources */ = {isa = PBXBuildFile; fileRef = 21730A1A2AE117ED00B2B70A /* xsl-index.html */; };
 		21C6E2002AAAD9AE00EF98B5 /* JDXSLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C6E1FF2AAAD9AE00EF98B5 /* JDXSLViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -54,6 +55,7 @@
 		103D3013A3B9C1ADC42A63A5 /* Pods-JDHybrid_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDHybrid_Example.release.xcconfig"; path = "Target Support Files/Pods-JDHybrid_Example/Pods-JDHybrid_Example.release.xcconfig"; sourceTree = "<group>"; };
 		212DD6DC2AAAD4730048ED4E /* XImageElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XImageElement.m; sourceTree = "<group>"; };
 		212DD6DD2AAAD4730048ED4E /* XImageElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XImageElement.h; sourceTree = "<group>"; };
+		21730A1A2AE117ED00B2B70A /* xsl-index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "xsl-index.html"; sourceTree = "<group>"; };
 		21C6E1FE2AAAD9AE00EF98B5 /* JDXSLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDXSLViewController.h; sourceTree = "<group>"; };
 		21C6E1FF2AAAD9AE00EF98B5 /* JDXSLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDXSLViewController.m; sourceTree = "<group>"; };
 		2249E01521726C41DE2DF153 /* Pods_JDHybrid_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDHybrid_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +204,7 @@
 				EF75D52529B9AE7500E594D3 /* JDCacheWebViewController.m */,
 				21C6E1FE2AAAD9AE00EF98B5 /* JDXSLViewController.h */,
 				21C6E1FF2AAAD9AE00EF98B5 /* JDXSLViewController.m */,
+				21730A1A2AE117ED00B2B70A /* xsl-index.html */,
 				FDE14D69284B9AF7003D85EE /* XHDefine.h */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -371,6 +374,7 @@
 				EF75D57E29B9C4AA00E594D3 /* resource in Resources */,
 				B057F79C286ECED4006E75B1 /* dispatchEvent.html in Resources */,
 				B05242002914E9A200F981F6 /* jdbridge_demo.html in Resources */,
+				21730A1B2AE117ED00B2B70A /* xsl-index.html in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,

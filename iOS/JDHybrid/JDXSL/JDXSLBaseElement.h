@@ -40,11 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSDictionary * style;
 @property (nonatomic, copy, readonly) NSDictionary * xslStyle;
 
-//透明度
-@property (nonatomic, assign, readonly) CGFloat opacity;
-
-@property (nonatomic, copy)NSString *border_radius;
-
 //同层渲染对应的 WKChildScrollView
 @property (nonatomic, weak) UIView * weakWKChildScrollView;
 
@@ -53,13 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIView *containerView; //在此添加用于同层渲染的view
 
 @property (nonatomic, assign) BOOL isAddToSuper;
-
-//属性列表
-@property (nonatomic, strong) NSMutableDictionary * propertValues;
-
-@property (nonatomic, strong) NSString* elementRenderStartTime;
-
-@property (nonatomic, strong) NSString* elementCreateTime;
 
 //同层渲染元素出现
 - (void)addToWKChildScrollView;
@@ -84,27 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)getCurrentTime;
 
-@end
-
-@interface JDXSLBaseElement (layer)
-
-- (void)setStyle:(id)style value:(id)value target:(id)target;
-- (void)setStyle:(id)style target:(id)target;
-
-@end
-
-
-
-@interface UIView (XSLUtil)
-
-- (void)xsl_drawCornerRadius:(CGFloat)radius corners:(UIRectCorner)corners;
-
-- (void)xsl_drawCornerRadius:(CGFloat)radius corners:(UIRectCorner)corners frame:(CGRect)frame;
-
-- (void)xsl_setCornerWithTopLeftCorner:(CGFloat)topLeft
-                    topRightCorner:(CGFloat)topRight
-                  bottomLeftCorner:(CGFloat)bottemLeft
-                 bottomRightCorner:(CGFloat)bottemRight;
 @end
 
 NS_ASSUME_NONNULL_END

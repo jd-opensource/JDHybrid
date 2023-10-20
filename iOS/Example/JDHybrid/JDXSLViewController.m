@@ -46,11 +46,10 @@
         webView.navigationDelegate = self;
     }
     webView.backgroundColor = [UIColor grayColor];
-    
     [self.view addSubview:webView];
     _bridgeManager = [JDBridgeManager bridgeForWebView:webView];
     [[JDXSLManager shareManager] initXslManagerWithWebView:webView];
-    [webView loadRequest:[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://xsl-test1.local-pf.jd.com"]]];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"xsl-index" ofType:@"html"]]]];
 }
 
 - (WKProcessPool *)processPool{
