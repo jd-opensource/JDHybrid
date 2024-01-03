@@ -2,7 +2,7 @@
 
 ## 类结构图
 
-![XCacheUML](../doc/jdcache_process.md)
+![XCacheUML](../../doc/jdcache_process.md)
 
 ## 依赖
 
@@ -10,7 +10,7 @@
 
 Gradle
 
-项目 build.gradle`
+项目 `build.gradle`
 
 ```groovy
 	allprojects {
